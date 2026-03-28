@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #080807;
+  --accent: #FFD000;
+  --text: #f0ede6;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), 'DM Sans', sans-serif;
+  cursor: none;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("/grain.svg");
+  background-size: 180px 180px;
+}
+
+main, header, footer, section { position: relative; z-index: 1; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0d0c0b; }
+::-webkit-scrollbar-thumb { background: rgba(255, 208, 0, 0.4); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 208, 0, 0.7); }
+
+::selection { background: #FFD000; color: #080807; }
+
+.cursor-tactical {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.stripe-bg {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 8px,
+    rgba(255, 208, 0, 0.018) 8px,
+    rgba(255, 208, 0, 0.018) 10px
+  );
+}
+
+.btn-tactical {
+  background: #FFD000;
+  color: #080807;
+  font-family: var(--font-display), 'Black Ops One', cursive;
+  letter-spacing: 0.08em;
+  border-radius: 2px;
+  border: 2px solid transparent;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn-tactical:hover {
+  background: transparent;
+  color: #FFD000;
+  border-color: #FFD000;
+}
+
+.btn-tactical-ghost {
+  background: transparent;
+  color: #FFD000;
+  font-family: var(--font-display), 'Black Ops One', cursive;
+  letter-spacing: 0.08em;
+  border-radius: 2px;
+  border: 2px solid rgba(255, 208, 0, 0.5);
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn-tactical-ghost:hover {
+  background: #FFD000;
+  color: #080807;
+  border-color: #FFD000;
+}
+
+.input-tactical {
+  background: #0d0c0b;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: #f0ede6;
+  border-radius: 2px;
+  outline: none;
+  font-family: var(--font-body), 'DM Sans', sans-serif;
+}
+
+.input-tactical:focus {
+  border-color: #FFD000;
+  box-shadow: 0 0 0 2px rgba(255, 208, 0, 0.25);
+}
+
+.input-tactical::placeholder {
+  color: rgba(240, 237, 230, 0.3);
+}
+
+.section-title {
+  font-family: var(--font-display), 'Black Ops One', cursive;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.card-splatter {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-splatter::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  background-image: url("/splatter-sm.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(0.7) rotate(-10deg);
+  pointer-events: none;
+}
+
+.card-splatter:hover::after {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  .cursor-tactical { display: none; }
+}
