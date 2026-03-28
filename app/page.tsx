@@ -9,7 +9,6 @@ import Galeria from '@/components/landing/Galeria'
 import FAQ from '@/components/landing/FAQ'
 import Contacto from '@/components/landing/Contacto'
 import Footer from '@/components/landing/Footer'
-import WhatsAppButton from '@/components/landing/WhatsAppButton'
 import ChatButton from '@/components/landing/ChatButton'
 
 export default function Home() {
@@ -26,7 +25,6 @@ export default function Home() {
       <FAQ />
       <Contacto />
       <Footer />
-      <WhatsAppButton />
       <ChatButton />
     </main>
   )
