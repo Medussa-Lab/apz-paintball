@@ -10,8 +10,8 @@ const items = [
         <circle cx="12" cy="12" r="10" strokeWidth={1.5} />
       </svg>
     ),
-    title: '¿Qué es el paintball?',
-    text: 'El paintball es un deporte de equipo donde los jugadores se eliminan al impactar a sus oponentes con proyectiles de pintura biodegradable disparados con marcadoras de aire comprimido. Combina estrategia, trabajo en equipo y adrenalina pura.',
+    title: 'Origen: 1981, New Hampshire',
+    text: 'El paintball nació en 1981 en Estados Unidos. Los ganaderos usaban marcadoras de aire comprimido para marcar árboles y ganado. La imaginación hizo el resto y lo que era un trabajo rutinario se convirtió en el deporte más adrenalínico del mundo.',
   },
   {
     icon: (
@@ -19,8 +19,8 @@ const items = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
-    title: 'Seguridad ante todo',
-    text: 'El equipo de protección es obligatorio: casco homologado con visor térmico antivaho, peto acolchado, guantes y protecciones. Las marcadoras tienen limitadores de velocidad certificados. El índice de lesiones es inferior al del fútbol.',
+    title: 'Seguridad total',
+    text: 'Mono integral, chaleco anti-bolas, protector de cuello, máscara Valken MI-3 Thermal con doble lente antivaho y guantes. Antes de cada partida el monitor explica todas las normas. El índice de lesiones es inferior al del tenis, fútbol o golf.',
   },
   {
     icon: (
@@ -28,8 +28,8 @@ const items = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
-    title: 'Deporte de equipo',
-    text: 'El paintball desarrolla habilidades clave: comunicación bajo presión, liderazgo, toma de decisiones rápidas y cohesión de equipo. Es la actividad perfecta para team building, despedidas, cumpleaños o simplemente pasar un día diferente con amigos.',
+    title: 'Acción, estrategia y equipo',
+    text: 'El paintball combina acción física, estrategia, habilidad, inteligencia e improvisación. Es el único juego que da la sensación de vivir una aventura real. Ideal para team building, despedidas, cumpleaños o simplemente descargar adrenalina.',
   },
   {
     icon: (
@@ -37,16 +37,16 @@ const items = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
       </svg>
     ),
-    title: 'Bolas biodegradables',
-    text: 'Las bolas de paintball están fabricadas con una cáscara de gelatina vegetal y relleno de pintura a base de agua, no tóxica y biodegradable. Son completamente seguras para el medioambiente y se disuelven con la lluvia.',
+    title: '100% biodegradable',
+    text: 'La cápsula exterior de las bolas es de gelatina orgánica. El interior es colorante alimenticio y propilenglicol, el mismo líquido que se usa en los jarabes. No son tóxicas, se retiran con agua y son completamente respetuosas con el medioambiente.',
   },
 ]
 
 const steps = [
-  { num: '01', title: 'Llegada y equipamiento', text: 'Recogida del equipo completo y briefing de normas de seguridad con nuestro instructor.' },
-  { num: '02', title: 'Elección de modalidad', text: 'El grupo elige la modalidad de juego: capturar la base, bandera central, El Capitán u otras.' },
-  { num: '03', title: 'Al campo de batalla', text: 'Partidas de 10-20 minutos en nuestros escenarios de bosque con obstáculos naturales.' },
-  { num: '04', title: 'Recarga y estrategia', text: 'Entre rondas, tiempo para reponer bolas, revisar estrategia y recuperar el aliento.' },
+  { num: '01', title: 'Llegada y equipamiento', text: 'Recogida del equipo completo: mono, chaleco, máscara térmica, guantes y marcadora. Briefing de normas de seguridad con el monitor.' },
+  { num: '02', title: 'Elección de modalidad', text: 'El grupo elige el modo de juego: Capturar la Base, El Capitán, Bandera Central, Nocturno o Infantil. Cada partida tiene un objetivo diferente.' },
+  { num: '03', title: 'Al campo de batalla', text: 'Rondas de combate en 20.000m² de bosque con 2 escenarios de grandes dimensiones y obstáculos naturales. Cuando caes, zona de seguridad.' },
+  { num: '04', title: 'Recarga y nueva ronda', text: 'Entre rondas, tiempo para reponer bolas, agua mineral y revisar la estrategia. En unos instantes... ¡vuelta a la carga! La sesión dura 2-3 horas.' },
 ]
 
 export default function SobrePaintball() {

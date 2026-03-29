@@ -5,40 +5,44 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const faqs = [
   {
+    q: '¿La práctica del paintball conlleva algún tipo de riesgo?',
+    a: 'El índice de lesiones es muy inferior al de deportes como el tenis, fútbol o golf. Siempre que se use la equipación adecuada y se respeten las normas de seguridad no se sufrirá ningún daño. Únicamente podría dejar pequeños moratones si se incumpliera la norma de no disparar a menos de 10 metros. Antes de cada partida el monitor informa a todos los jugadores de las normas de seguridad.',
+  },
+  {
+    q: '¿Se usan pistolas de verdad?',
+    a: 'No. Se llaman marcadoras, no pistolas, porque su función es marcar con pintura, no disparar proyectiles. Funcionan con aire comprimido de alta presión. Para los niños usamos marcadoras infantiles JT Splatmaster que funcionan con muelle, lo que implica mucha menos velocidad y bolas de menor calibre.',
+  },
+  {
+    q: '¿La pintura de las bolas es tóxica?',
+    a: 'No. Las bolas están fabricadas con una cápsula de gelatina y relleno de colorante alimenticio y propilenglicol (el mismo líquido que se usa en jarabes). Son 100% biodegradables, no tóxicas y se retiran fácilmente con agua. No dejan manchas permanentes.',
+  },
+  {
     q: '¿Cuántos jugadores se necesitan para jugar?',
-    a: 'El mínimo es 6 jugadores para partidas de fin de semana y 8 para entre semana. No hay máximo: aceptamos grupos de hasta 30 jugadores simultáneos. Para grupos más grandes, contacta con nosotros para organizarlo.',
+    a: 'El mínimo es 6 jugadores en fin de semana y festivos, y 8 jugadores de lunes a jueves no festivos. El máximo son 30 jugadores simultáneos. Para grupos especiales o team building, consúltanos para condiciones personalizadas.',
   },
   {
     q: '¿Cuál es la edad mínima para jugar?',
-    a: 'Desde 8 años con nuestra modalidad Paintball Infantil, que usa marcadoras de acción manual y bolas más blandas. Para la modalidad estándar, la edad mínima recomendada es 14 años. Adultos y niños pueden jugar juntos en partidas mixtas.',
+    a: 'Desde 8 años con Paintball Infantil (marcadoras de acción manual, bolas más blandas y de menor calibre). Para la modalidad de adultos, la edad mínima es 14 años. Los jugadores entre 14 y 16 años deben presentar autorización firmada por sus padres o tutores. Adultos y niños pueden jugar juntos.',
   },
   {
-    q: '¿Qué ropa debo llevar?',
-    a: 'Ropa deportiva cómoda y calzado con buen agarre (botas de monte o zapatillas deportivas). Evita ropa muy ajustada. El traje de protección, casco y guantes están incluidos en el precio.',
+    q: '¿Cuánto tiempo dura una sesión?',
+    a: 'Entre 2 y 3 horas dependiendo de la cantidad de munición y la estrategia de los equipos. Cada ronda de juego es corta: cuando un jugador es eliminado sale a la zona de seguridad y en unos instantes comienza la siguiente ronda.',
   },
   {
-    q: '¿Duelen las bolas de paintball?',
-    a: 'La sensación es similar a un capirotazo fuerte. Con el traje y el equipo de protección incluido (casco, peto y protecciones), el impacto es mínimo. El paintball infantil usa bolas aún más suaves.',
+    q: '¿Puedo llevar gafas debajo de la máscara?',
+    a: 'Sí, siempre que el tamaño no sea muy grande. Usamos máscaras con lentes térmicas de doble pantalla que evitan que se empañen. Si las lentes de tus gafas se empañan, te proporcionamos líquido antivaho para aplicar sobre ellas.',
   },
   {
-    q: '¿Está incluido todo el equipamiento?',
-    a: 'Sí, 100%. Marcadora, traje completo, casco térmico antivaho, protecciones, guantes, 100 bolas de pintura, seguro de accidentes, agua mineral e instructor/monitor durante toda la partida. Sin sorpresas en el precio.',
+    q: '¿Hay seguro que cubra a los jugadores?',
+    a: 'Sí. Contamos con seguro de responsabilidad civil y accidentes que cubre a todos los jugadores dentro del campo, incluido en el precio. Es importante firmar el documento de consentimiento que facilitamos antes del inicio de la partida.',
   },
   {
-    q: '¿Cuánto tiempo dura una partida?',
-    a: 'Una sesión completa dura entre 2 y 3 horas aproximadamente, incluyendo la llegada, explicación de normas, equipamiento y las rondas de juego. Cada ronda de combate dura entre 10 y 20 minutos.',
-  },
-  {
-    q: '¿Se puede jugar sin experiencia previa?',
-    a: 'Por supuesto. No se necesita ninguna experiencia. El instructor explica todas las normas y el manejo de la marcadora antes de comenzar. Tenemos modalidades para todos los niveles, desde iniciación hasta avanzado.',
+    q: '¿Cómo llego al campo?',
+    a: 'El campo está en Av. Nueva York 33-35, La Zapateira, A Coruña, a 10 minutos del centro. En transporte público: bus línea 24 de A Coruña, parada en la urbanización "O Carón", a escasos metros del campo. En coche: disponemos de zona de aparcamiento en el propio campo.',
   },
   {
     q: '¿Cómo funciona la reserva?',
-    a: 'Rellena el formulario de reserva en esta página o llámanos al 722 124 321. Recibirás confirmación en menos de 24 horas. No se requiere pago previo para reservar: el pago se realiza el día de la partida.',
-  },
-  {
-    q: '¿Dónde estáis ubicados?',
-    a: 'En Av. Nueva York 33-35, La Zapateira, A Coruña. A solo 10 minutos del centro. Accesible en bus línea 24 (parada "O Carón") o en coche con parking gratuito.',
+    a: 'Rellena el formulario de esta página o llámanos al 981 151 871, 653 101 094 o 722 124 321. Recibirás confirmación en menos de 24 horas. No se requiere pago previo: el abono se realiza el día de la partida.',
   },
 ]
 

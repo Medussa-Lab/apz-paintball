@@ -21,7 +21,7 @@ const contactItems = [
       </svg>
     ),
     label: 'Teléfonos',
-    value: '981 151 871 · 653 101 094',
+    value: '981 151 871 · 653 101 094 · 722 124 321',
     href: 'tel:981151871',
   },
   {

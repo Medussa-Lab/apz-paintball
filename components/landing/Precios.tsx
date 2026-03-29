@@ -191,10 +191,9 @@ export default function Precios() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-8 bg-accent/8 border border-accent/20 rounded-tactical p-5 text-center"
         >
-          <p className="text-text text-sm">
-            <span className="text-accent font-display tracking-wide">TODO INCLUIDO</span>
-            {' '}—{' '}
-            Marcadora · Traje completo · Casco térmico antivaho · Protecciones · Guantes · Instructor · Seguro · Agua · IVA 21%
+          <p className="text-accent font-display tracking-wide text-sm mb-2">TODO INCLUIDO EN EL PRECIO</p>
+          <p className="text-text-muted text-xs leading-relaxed">
+            Monitor · Marcadora · Linternas tácticas (nocturno) · Recargas de aire · 100 bolas · Máscara Valken MI-3 Thermal · Buzo integral · Chaleco anti-bolas · Protector de cuello · Guantes · Agua mineral · Seguro RC y Accidentes · IVA 21%
           </p>
         </motion.div>
       </div>

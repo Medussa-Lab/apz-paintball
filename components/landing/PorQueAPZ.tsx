@@ -14,22 +14,22 @@ const pillars = [
   {
     icon: '🔫',
     title: 'Equipamiento Profesional',
-    desc: 'Tippmann 98, BT-4 Combat, Valken SW-1. Las mejores marcadoras del mercado + traje completo + máscara térmica antivaho.',
+    desc: 'Marcadoras Tippmann 98, BT-4 Combat y Valken SW-1. Mono integral, chaleco anti-bolas, protector de cuello, máscara Valken MI-3 Thermal con doble lente antivaho y guantes con protecciones.',
   },
   {
     icon: '👨‍👩‍👧‍👦',
     title: 'Todas las Edades',
-    desc: 'Desde 8 años con marcadoras infantiles de acción manual. Adultos y niños pueden jugar juntos en la misma partida.',
+    desc: 'Desde 8 años con marcadoras JT Splatmaster de acción manual y bolas de menor calibre. Adultos (desde 14 años) y niños pueden jugar juntos en la misma partida. Los menores de 16 necesitan autorización parental.',
   },
   {
     icon: '🌙',
-    title: 'Partidas Nocturnas',
-    desc: 'Linternas tácticas montadas en la marcadora. Bolas fluorescentes que iluminan el bosque. Una experiencia única.',
+    title: 'Paintball Nocturno',
+    desc: 'Linternas tácticas con pulsador remoto acopladas a la marcadora. La cápsula de gelatina de las bolas brilla al impactar en la oscuridad del bosque. Una experiencia única que dispara la adrenalina.',
   },
   {
     icon: '🛡️',
     title: 'Todo Incluido',
-    desc: 'Seguro de responsabilidad civil + accidentes, agua mineral, instructor/monitor en todo momento. Sin costes ocultos.',
+    desc: 'Seguro de RC y Accidentes, agua mineral, monitor en todo momento, recargas de aire, linternas tácticas para nocturno e IVA 21%. El precio que ves es el precio que pagas.',
   },
 ]
 
