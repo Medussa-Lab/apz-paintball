@@ -1,57 +1,52 @@
 'use client'
 
-// Atmospheric fog — same structure as GZ Simlab but with a trace of amber
-// Static blobs (no animation) to avoid layer-recomposition flicker
+// Atmospheric fog background — static blobs with blur
+// Fixed position behind all content, yellow/amber tinted for APZ tactical aesthetic
 export default function FogBackground() {
   return (
     <div
       aria-hidden="true"
       style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}
     >
-      {/* Blob 1 — large, top-left, neutral white like GZ */}
+      {/* Large amber blob — top-left */}
       <div style={{
-        position: 'absolute', width: 760, height: 640,
-        top: '-8%', left: '-12%',
-        background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.055) 0%, transparent 68%)',
-        filter: 'blur(90px)',
-      }} />
-
-      {/* Blob 2 — center-right */}
-      <div style={{
-        position: 'absolute', width: 520, height: 480,
-        top: '22%', right: '-8%',
-        background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.042) 0%, transparent 68%)',
-        filter: 'blur(110px)',
-      }} />
-
-      {/* Blob 3 — bottom */}
-      <div style={{
-        position: 'absolute', width: 820, height: 520,
-        bottom: '-6%', left: '8%',
-        background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.038) 0%, transparent 68%)',
-        filter: 'blur(120px)',
-      }} />
-
-      {/* Blob 4 — subtle amber tint center (APZ identity accent) */}
-      <div style={{
-        position: 'absolute', width: 420, height: 360,
-        top: '42%', left: '28%',
-        background: 'radial-gradient(ellipse at center, rgba(255,190,0,0.038) 0%, transparent 68%)',
+        position: 'absolute', width: 900, height: 700,
+        top: '-12%', left: '-18%',
+        background: 'radial-gradient(ellipse at center, rgba(255,208,0,0.045) 0%, transparent 62%)',
         filter: 'blur(100px)',
       }} />
-
-      {/* Blob 5 — top-right subtle */}
+      {/* Medium — center-right */}
       <div style={{
-        position: 'absolute', width: 380, height: 320,
-        top: '5%', right: '10%',
-        background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.028) 0%, transparent 65%)',
-        filter: 'blur(80px)',
+        position: 'absolute', width: 560, height: 520,
+        top: '28%', right: '-12%',
+        background: 'radial-gradient(ellipse at center, rgba(255,208,0,0.032) 0%, transparent 62%)',
+        filter: 'blur(120px)',
       }} />
-
-      {/* Vignette — same as GZ Simlab */}
+      {/* Large — bottom */}
+      <div style={{
+        position: 'absolute', width: 780, height: 560,
+        bottom: '-8%', left: '8%',
+        background: 'radial-gradient(ellipse at center, rgba(255,180,0,0.038) 0%, transparent 62%)',
+        filter: 'blur(130px)',
+      }} />
+      {/* Small — center warm */}
+      <div style={{
+        position: 'absolute', width: 420, height: 380,
+        top: '52%', left: '32%',
+        background: 'radial-gradient(ellipse at center, rgba(255,120,0,0.022) 0%, transparent 62%)',
+        filter: 'blur(110px)',
+      }} />
+      {/* Top-right subtle */}
+      <div style={{
+        position: 'absolute', width: 380, height: 340,
+        top: '5%', right: '10%',
+        background: 'radial-gradient(ellipse at center, rgba(255,208,0,0.02) 0%, transparent 60%)',
+        filter: 'blur(90px)',
+      }} />
+      {/* Vignette — darkens edges for depth */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'radial-gradient(ellipse 115% 115% at 50% 50%, transparent 28%, rgba(0,0,0,0.55) 100%)',
+        background: 'radial-gradient(ellipse 130% 130% at 50% 50%, transparent 22%, rgba(0,0,0,0.5) 100%)',
       }} />
     </div>
   )
