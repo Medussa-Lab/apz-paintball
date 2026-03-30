@@ -13,7 +13,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background-color: var(--bg);
+  background-color: #000;
   color: var(--text);
   font-family: var(--font-body), 'DM Sans', sans-serif;
   cursor: none;
