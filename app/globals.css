@@ -142,6 +142,53 @@ main, header, footer, section { position: relative; z-index: 1; }
   transform: scale(1) rotate(0deg);
 }
 
+/* ── Heading shimmer — amber metallic light travels through letters ── */
+@keyframes textShimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 100% center; }
+}
+
+.heading-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    #f0ede6 0%,
+    #f0ede6 46%,
+    #ffe566 49%,
+    #fff5c0 50%,
+    #ffe566 51%,
+    #f0ede6 54%,
+    #f0ede6 100%
+  );
+  background-size: 800% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heading-shimmer .text-accent {
+  background-image: linear-gradient(
+    90deg,
+    #FFD000 0%,
+    #FFD000 46%,
+    #fff0a0 49%,
+    #ffffff 50%,
+    #fff0a0 51%,
+    #FFD000 54%,
+    #FFD000 100%
+  );
+  background-size: 800% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heading-shimmer.shimmer-active {
+  animation: textShimmer 10s linear infinite;
+}
+.heading-shimmer.shimmer-active .text-accent {
+  animation: textShimmer 10s linear infinite;
+}
+
 @media (max-width: 768px) {
   body { cursor: auto; }
   .cursor-tactical { display: none; }

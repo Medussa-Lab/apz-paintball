@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Black_Ops_One, DM_Sans } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/landing/CustomCursor'
+import ShimmerObserver from '@/components/landing/ShimmerObserver'
 
 const blackOpsOne = Black_Ops_One({
   weight: '400',
@@ -17,7 +18,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'APZ Paintball — Campo de Batalla en A Coruña',
+  title: 'APZ Paintball',
   description:
     'El campo de paintball más grande de Galicia. 20.000m² de bosque en La Zapateira, A Coruña. Reserva tu partida online.',
   keywords: ['paintball', 'A Coruña', 'Galicia', 'campo paintball', 'paintball nocturno', 'paintball infantil', 'team building'],
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${blackOpsOne.variable} ${dmSans.variable}`}>
       <body className="bg-bg text-text font-body antialiased">
+        <ShimmerObserver />
         <CustomCursor />
         {children}
       </body>

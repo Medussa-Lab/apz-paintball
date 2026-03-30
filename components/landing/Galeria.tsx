@@ -1,30 +1,30 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 const photos = [
-  { id: 1, aspect: 'aspect-video', label: 'Combate en el bosque', tag: 'ACCIÓN' },
-  { id: 2, aspect: 'aspect-square', label: 'Equipamiento táctico', tag: 'EQUIPO' },
-  { id: 3, aspect: 'aspect-[3/4]', label: 'Jugador en posición', tag: 'CAMPO' },
-  { id: 4, aspect: 'aspect-[3/4]', label: 'Asalto a la base', tag: 'ACCIÓN' },
-  { id: 5, aspect: 'aspect-video', label: 'Escenario nocturno', tag: 'NOCTURNO' },
-  { id: 6, aspect: 'aspect-square', label: 'Marcadora Tippmann 98', tag: 'EQUIPO' },
-  { id: 7, aspect: 'aspect-video', label: 'Grupo celebrando', tag: 'GRUPOS' },
-  { id: 8, aspect: 'aspect-square', label: 'Impacto directo', tag: 'ACCIÓN' },
-  { id: 9, aspect: 'aspect-[3/4]', label: 'Paintball infantil', tag: 'FAMILIAR' },
+  { src: '/gallery/ataque.png',       label: 'Asalto táctico',      tag: 'ACCIÓN' },
+  { src: '/gallery/campo.png',        label: 'Campo en acción',     tag: 'CAMPO' },
+  { src: '/gallery/barco-team.png',   label: 'Equipo en el barco',  tag: 'ESCENARIO' },
+  { src: '/gallery/ataque2.png',      label: 'Combate en el bosque',tag: 'ACCIÓN' },
+  { src: '/gallery/barco2.png',       label: 'Escenario del barco', tag: 'ESCENARIO' },
+  { src: '/gallery/escuadron.png',    label: 'Escuadrón listo',     tag: 'EQUIPO' },
+  { src: '/gallery/campo2.png',       label: 'Vista del campo',     tag: 'CAMPO' },
+  { src: '/gallery/contenedor.png',   label: 'Zona de contenedores',tag: 'ESCENARIO' },
+  { src: '/gallery/barco3.webp',      label: 'El barco de noche',   tag: 'NOCTURNO' },
 ]
 
-// Different muted forest shades for visual variety
-const bgShades = [
-  '#111110', '#0f0f0e', '#131312',
-  '#111110', '#0f0f0e', '#131312',
-  '#111110', '#0f0f0e', '#131312',
+const videos = [
+  { id: 'f_XVfEcGlag', label: 'APZ Paintball en acción' },
+  { id: 'n4KsfQ1dQRY', label: 'Partida completa en APZ' },
 ]
 
 export default function Galeria() {
   return (
-    <section id="galeria" className="relative py-24 bg-bg overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="galeria" className="relative py-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -33,77 +33,72 @@ export default function Galeria() {
           transition={{ duration: 0.6 }}
           className="mb-14"
         >
-          <p className="text-accent font-display text-sm tracking-[0.3em] uppercase mb-3">
-            // Galería
-          </p>
-          <h2 className="section-title text-4xl md:text-5xl text-text">
-            EL CAMPO EN <span className="text-accent">ACCIÓN</span>
+          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">005 / Galería</span>
+          <h2 className="heading-shimmer section-title text-[clamp(2.4rem,5.5vw,4rem)] leading-[0.95] mb-4">
+            El campo en <span className="text-accent">acción</span>
           </h2>
-          <p className="text-text-muted mt-4 max-w-xl text-lg">
+          <p className="text-text-muted text-lg max-w-xl">
             20.000m² de bosque, escenarios únicos y partidas que no olvidarás.
           </p>
         </motion.div>
 
-        {/* Masonry grid using CSS columns */}
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+        {/* Photo masonry grid */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 mb-8">
           {photos.map((photo, i) => (
             <motion.div
-              key={photo.id}
-              initial={{ opacity: 0, y: 30 }}
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-              className="relative break-inside-avoid group overflow-hidden rounded-tactical"
-              style={{ backgroundColor: bgShades[i] }}
+              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+              className="relative break-inside-avoid group overflow-hidden rounded-tactical bg-[#111110]"
             >
-              {/* Placeholder with aspect ratio */}
-              <div className={`${photo.aspect} relative`}>
-                {/* Grid pattern overlay */}
-                <div
-                  className="absolute inset-0 opacity-10"
-                  style={{
-                    backgroundImage:
-                      'linear-gradient(rgba(255,208,0,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,208,0,0.15) 1px, transparent 1px)',
-                    backgroundSize: '40px 40px',
-                  }}
+              <div className="relative w-full aspect-[4/3]">
+                <Image
+                  src={photo.src}
+                  alt={photo.label}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-
-                {/* APZ watermark */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span
-                    className="font-display text-accent/10 select-none"
-                    style={{ fontSize: 'clamp(3rem, 8vw, 6rem)' }}
-                  >
-                    APZ
-                  </span>
-                </div>
-
-                {/* Placeholder icon */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                  <span className="text-4xl opacity-20">
-                    {i % 3 === 0 ? '🎯' : i % 3 === 1 ? '🔫' : '🌲'}
-                  </span>
-                  <span className="text-text-muted/30 text-xs font-display tracking-widest">
-                    PRÓXIMAMENTE
-                  </span>
-                </div>
-
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-bg/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center gap-3">
-                  <span className="text-xs font-display tracking-[0.3em] text-accent">
+                <div className="absolute inset-0 bg-bg/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
+                  <span className="text-xs font-display tracking-[0.3em] text-accent">{photo.tag}</span>
+                  <span className="text-text text-sm font-body text-center px-4">{photo.label}</span>
+                </div>
+                {/* Tag */}
+                <div className="absolute bottom-3 left-3 group-hover:opacity-0 transition-opacity duration-200">
+                  <span className="text-[10px] font-display tracking-widest text-bg bg-accent/80 px-2 py-0.5 rounded-tactical">
                     {photo.tag}
-                  </span>
-                  <span className="text-text text-sm font-body text-center px-4">
-                    {photo.label}
                   </span>
                 </div>
               </div>
+            </motion.div>
+          ))}
+        </div>
 
-              {/* Tag bottom-left */}
-              <div className="absolute bottom-3 left-3 opacity-100 group-hover:opacity-0 transition-opacity duration-200">
-                <span className="text-[10px] font-display tracking-widest text-bg bg-accent/80 px-2 py-0.5 rounded-tactical">
-                  {photo.tag}
-                </span>
+        {/* YouTube videos */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          {videos.map((video, i) => (
+            <motion.div
+              key={video.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="relative overflow-hidden rounded-tactical border border-white/[0.07] bg-[#111110]"
+            >
+              <div className="relative aspect-video">
+                <iframe
+                  src={`https://www.youtube.com/embed/${video.id}?modestbranding=1&rel=0`}
+                  title={video.label}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+              <div className="px-4 py-3 border-t border-white/[0.05]">
+                <span className="text-text-muted text-xs font-body">{video.label}</span>
               </div>
             </motion.div>
           ))}
@@ -115,9 +110,9 @@ export default function Galeria() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12 text-center"
+          className="text-center"
         >
-          <p className="text-text-muted text-sm mb-4">
+          <p className="text-text-muted text-sm mb-4 font-body">
             ¿Quieres ver más? Síguenos en Instagram y etiquétanos en tus partidas.
           </p>
           <a
@@ -132,6 +127,7 @@ export default function Galeria() {
             @APZPAINTBALL
           </a>
         </motion.div>
+
       </div>
     </section>
   )
