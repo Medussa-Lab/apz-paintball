@@ -1,139 +1,91 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
 const items = [
   {
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-        <circle cx="12" cy="12" r="10" strokeWidth={1.5} />
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
       </svg>
     ),
     title: 'Origen: 1981, New Hampshire',
-    text: 'El paintball nació en 1981 en Estados Unidos. Los ganaderos usaban marcadoras de aire comprimido para marcar árboles y ganado. La imaginación hizo el resto y lo que era un trabajo rutinario se convirtió en el deporte más adrenalínico del mundo.',
+    text: 'El paintball nació en 1981 en Estados Unidos. Los ganaderos usaban marcadoras de aire comprimido para marcar árboles y ganado. La imaginación hizo el resto y lo que era trabajo rutinario se convirtió en el deporte más adrenalínico del mundo.',
   },
   {
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
-    title: 'Seguridad total',
-    text: 'Mono integral, chaleco anti-bolas, protector de cuello, máscara Valken MI-3 Thermal con doble lente antivaho y guantes. Antes de cada partida el monitor explica todas las normas. El índice de lesiones es inferior al del tenis, fútbol o golf.',
+    title: 'Más seguro que el tenis',
+    text: 'El índice de lesiones del paintball es inferior al del tenis, fútbol o golf. Mono integral, chaleco anti-bolas, máscara Valken MI-3 Thermal de doble lente antivaho y guantes. El monitor explica todas las normas antes de cada partida.',
   },
   {
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
     title: 'Acción, estrategia y equipo',
-    text: 'El paintball combina acción física, estrategia, habilidad, inteligencia e improvisación. Es el único juego que da la sensación de vivir una aventura real. Ideal para team building, despedidas, cumpleaños o simplemente descargar adrenalina.',
+    text: 'El paintball combina acción física, estrategia y trabajo en equipo. Es el único juego que da la sensación de vivir una aventura real. Ideal para team building, despedidas de soltero, cumpleaños o simplemente descargar adrenalina.',
   },
   {
     icon: (
-      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
       </svg>
     ),
     title: '100% biodegradable',
-    text: 'La cápsula exterior de las bolas es de gelatina orgánica. El interior es colorante alimenticio y propilenglicol, el mismo líquido que se usa en los jarabes. No son tóxicas, se retiran con agua y son completamente respetuosas con el medioambiente.',
+    text: 'La cápsula exterior es de gelatina orgánica. El interior, colorante alimenticio y propilenglicol — el mismo líquido que en los jarabes. No tóxicas, se retiran con agua y son totalmente respetuosas con el medioambiente del bosque.',
   },
 ]
 
-const steps = [
-  { num: '01', title: 'Llegada y equipamiento', text: 'Recogida del equipo completo: mono, chaleco, máscara térmica, guantes y marcadora. Briefing de normas de seguridad con el monitor.' },
-  { num: '02', title: 'Elección de modalidad', text: 'El grupo elige el modo de juego: Capturar la Base, El Capitán, Bandera Central, Nocturno o Infantil. Cada partida tiene un objetivo diferente.' },
-  { num: '03', title: 'Al campo de batalla', text: 'Rondas de combate en 20.000m² de bosque con 2 escenarios de grandes dimensiones y obstáculos naturales. Cuando caes, zona de seguridad.' },
-  { num: '04', title: 'Recarga y nueva ronda', text: 'Entre rondas, tiempo para reponer bolas, agua mineral y revisar la estrategia. En unos instantes... ¡vuelta a la carga! La sesión dura 2-3 horas.' },
-]
-
 export default function SobrePaintball() {
-  return (
-    <section id="sobre-paintball" className="relative py-24 bg-bg overflow-hidden">
-      {/* Faint background text */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" aria-hidden="true">
-        <span className="font-display text-text/[0.012] whitespace-nowrap" style={{ fontSize: 'clamp(6rem, 20vw, 18rem)' }}>
-          PAINTBALL
-        </span>
-      </div>
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-10%' })
 
-      <div className="relative max-w-7xl mx-auto px-6">
-        {/* Header */}
+  return (
+    <section id="sobre-paintball" className="py-32" ref={ref}>
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 55 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
           className="mb-16"
         >
-          <p className="text-accent font-display text-sm tracking-[0.3em] uppercase mb-3">
-            // Sobre el deporte
-          </p>
-          <h2 className="section-title text-4xl md:text-5xl text-text">
-            TODO SOBRE EL <span className="text-accent">PAINTBALL</span>
+          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">003 / El Deporte</span>
+          <h2 className="heading-shimmer section-title text-[clamp(2.4rem,5.5vw,4rem)] leading-[0.95] mb-4">
+            Todo sobre el <span className="text-accent">Paintball</span>
           </h2>
-          <p className="text-text-muted mt-4 text-lg max-w-xl">
-            Adrenalina, estrategia y trabajo en equipo en 20.000m² de bosque galego.
+          <p className="text-text/50 text-[1.05rem] max-w-lg font-body">
+            Adrenalina, estrategia y trabajo en equipo. Más de 40 años de historia, millones de aficionados.
           </p>
         </motion.div>
 
-        {/* Info grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {items.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="bg-dark border border-white/8 rounded-tactical p-7 flex gap-5 group hover:border-accent/30 transition-all duration-300"
+              initial={{ opacity: 0, y: 40 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] }}
+              className="bg-[#111110] border border-white/[0.07] rounded-tactical p-7 flex gap-5 group hover:border-accent/30 transition-all duration-300"
             >
               <div className="text-accent flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300">
                 {item.icon}
               </div>
               <div>
-                <h3 className="font-display text-base text-text tracking-wide mb-2 group-hover:text-accent transition-colors duration-200">
+                <h3 className="font-display text-[1rem] tracking-wide text-text mb-2.5 group-hover:text-accent transition-colors duration-200">
                   {item.title.toUpperCase()}
                 </h3>
-                <p className="text-text-muted text-sm leading-relaxed">{item.text}</p>
+                <p className="text-text/50 text-[0.87rem] leading-relaxed font-body">{item.text}</p>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* How it works */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-10"
-        >
-          <h3 className="section-title text-2xl md:text-3xl text-text mb-10">
-            CÓMO ES UNA <span className="text-accent">PARTIDA</span>
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {steps.map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="relative bg-dark border border-white/8 rounded-tactical p-6 hover:border-accent/30 transition-all duration-300"
-              >
-                <span className="font-display text-accent/20 text-5xl leading-none select-none absolute top-4 right-4">
-                  {step.num}
-                </span>
-                <div className="w-8 h-0.5 bg-accent mb-4" />
-                <h4 className="font-display text-sm text-text tracking-wide mb-2">{step.title.toUpperCase()}</h4>
-                <p className="text-text-muted text-sm leading-relaxed">{step.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   )

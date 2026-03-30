@@ -61,7 +61,7 @@ export default function Proceso() {
           transition={{ duration: 0.9, ease: [0.4,0,0.2,1] }}
           className="text-center mb-16"
         >
-          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">003 / Proceso</span>
+          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">005 / Proceso</span>
           <h2 className="heading-shimmer section-title text-[clamp(2.4rem,5.5vw,4rem)] leading-[0.95] mb-4">
             ¿Cómo <span className="text-accent">funciona?</span>
           </h2>

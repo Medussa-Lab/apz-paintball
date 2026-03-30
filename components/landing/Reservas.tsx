@@ -73,7 +73,7 @@ export default function Reservas() {
           className="text-center mb-12"
         >
           <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">
-            007 / Reservas
+            008 / Reservas
           </span>
           <h2 className="heading-shimmer section-title text-[clamp(2.4rem,5vw,3.8rem)] leading-[0.95] mb-4">
             ¿LISTO PARA<br /><span className="text-accent">EL COMBATE?</span>
