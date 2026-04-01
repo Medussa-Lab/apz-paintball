@@ -1,5 +1,4 @@
 'use client'
-
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import type { GameMode } from '@/lib/types'
@@ -44,19 +43,26 @@ const gameModes: GameMode[] = [
   },
 ]
 
-function DifficultyDots({ level }: { level: number }) {
-  const label = level <= 1 ? 'Iniciación' : level <= 2 ? 'Fácil' : level <= 3 ? 'Medio' : level <= 4 ? 'Avanzado' : 'Extremo'
+const DIFF_LABELS = ['', 'Iniciación', 'Fácil', 'Medio', 'Avanzado', 'Extremo']
+
+function DifficultyBar({ level }: { level: number }) {
   return (
-    <div className="flex gap-1.5 items-center">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <div key={i} className={`w-2 h-2 rounded-full border ${i < level ? 'bg-accent border-accent' : 'bg-transparent border-white/20'}`} />
-      ))}
-      <span className="text-xs text-text-muted ml-1 font-body">{label}</span>
+    <div className="flex items-center gap-2">
+      <div className="flex gap-1">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div
+            key={i}
+            className="h-1 w-5 rounded-full transition-all"
+            style={{ background: i < level ? '#FFD000' : 'rgba(255,255,255,0.1)' }}
+          />
+        ))}
+      </div>
+      <span className="text-[0.7rem] text-text/35 font-body tracking-wide">{DIFF_LABELS[level]}</span>
     </div>
   )
 }
 
-function GameCard({ mode, delay }: { mode: GameMode; delay: number }) {
+function GameCard({ mode, delay, featured = false }: { mode: GameMode; delay: number; featured?: boolean }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-8%' })
 
@@ -66,20 +72,31 @@ function GameCard({ mode, delay }: { mode: GameMode; delay: number }) {
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay, ease: [0.4, 0, 0.2, 1] }}
-      className="relative bg-[#111110] border border-white/[0.07] rounded-tactical p-7 flex flex-col gap-4 group hover:border-accent/40 transition-all duration-300 hover:shadow-accent-card"
+      className={`group relative flex flex-col gap-5 p-7 rounded-tactical transition-all duration-300 overflow-hidden ${
+        featured
+          ? 'bg-gradient-to-br from-[#181714] to-[#111110] border border-accent/25 shadow-[0_0_40px_rgba(255,208,0,0.06)] hover:shadow-[0_0_60px_rgba(255,208,0,0.12)] hover:border-accent/40'
+          : 'bg-[#111110] border border-white/[0.06] hover:border-white/[0.14] hover:bg-[#141412] hover:shadow-[0_8px_40px_rgba(0,0,0,0.4)]'
+      }`}
     >
+      {/* Top accent line on featured */}
+      {featured && <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />}
+
+      {/* Tag */}
       {mode.tag && (
-        <span className="absolute top-4 right-4 text-[10px] font-display tracking-widest text-bg bg-accent px-2 py-0.5 rounded-tactical">
+        <span className="absolute top-4 right-4 text-[0.6rem] font-display tracking-[0.12em] text-bg bg-accent px-2.5 py-1 rounded-tactical">
           {mode.tag}
         </span>
       )}
-      <div className="text-4xl">{mode.icono}</div>
-      <div className="flex flex-col gap-3">
-        <h3 className="font-display text-[1.1rem] tracking-wide text-text group-hover:text-accent transition-colors duration-200">
+
+      {/* Icon */}
+      <div className="text-3xl">{mode.icono}</div>
+
+      <div className="flex flex-col gap-3 flex-1">
+        <h3 className={`font-display text-[1.05rem] tracking-wide transition-colors duration-200 ${featured ? 'text-accent' : 'text-text group-hover:text-accent'}`}>
           {mode.nombre.toUpperCase()}
         </h3>
-        <p className="text-text/50 text-[0.87rem] leading-relaxed font-body flex-1">{mode.descripcion}</p>
-        <DifficultyDots level={mode.dificultad} />
+        <p className="text-text/45 text-[0.85rem] leading-[1.8] font-body flex-1">{mode.descripcion}</p>
+        <DifficultyBar level={mode.dificultad} />
       </div>
     </motion.div>
   )
@@ -94,27 +111,27 @@ export default function Experiencia() {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
 
         <motion.div
-          initial={{ opacity: 0, y: 55 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
           className="mb-16"
         >
-          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">002 / Modalidades</span>
-          <h2 className="heading-shimmer section-title text-[clamp(2.4rem,5.5vw,4rem)] leading-[0.95] mb-4">
+          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-5">002 / Modalidades</span>
+          <h2 className="heading-shimmer section-title text-[clamp(2.6rem,5.5vw,4.2rem)] leading-[0.92] mb-4">
             Elige tu <span className="text-accent">Misión</span>
           </h2>
-          <p className="text-text/50 text-[1.05rem] max-w-lg font-body">
+          <p className="text-text/45 text-[1.05rem] max-w-lg font-body">
             Cinco modos de juego distintos. Cada partida es un combate diferente.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           {gameModes.slice(0, 3).map((mode, i) => (
-            <GameCard key={mode.id} mode={mode} delay={i * 0.08} />
+            <GameCard key={mode.id} mode={mode} delay={i * 0.1} />
           ))}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {gameModes.slice(3).map((mode, i) => (
-            <GameCard key={mode.id} mode={mode} delay={i * 0.08} />
+            <GameCard key={mode.id} mode={mode} delay={i * 0.1} featured={mode.id === 'nocturno'} />
           ))}
         </div>
 
