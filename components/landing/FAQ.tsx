@@ -30,7 +30,7 @@ export default function FAQ() {
             initial={{ opacity: 0, x: -65 }} animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.4,0,0.2,1] }}
           >
-            <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">009 / FAQ</span>
+            <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">007 / FAQ</span>
             <h2 className="heading-shimmer section-title text-[clamp(2.4rem,5.5vw,4rem)] leading-[0.95] mb-5">
               Preguntas <span className="text-accent">frecuentes</span>
             </h2>

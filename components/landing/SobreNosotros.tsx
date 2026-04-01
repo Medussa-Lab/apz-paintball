@@ -89,13 +89,13 @@ export default function SobreNosotros() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/[0.05] rounded-tactical overflow-hidden border border-white/[0.05]">
+            <div className="grid grid-cols-2 gap-px bg-white/[0.05] rounded-tactical overflow-hidden border border-white/[0.05]">
               {STATS.map((stat, i) => (
-                <div key={i} className="bg-[#0f0f0e] hover:bg-[#151513] transition-colors duration-300 text-center py-6 px-4 flex flex-col items-center gap-1">
-                  <div className="font-display text-accent leading-none whitespace-nowrap" style={{ fontSize: 'clamp(1.3rem,2.5vw,2rem)' }}>
+                <div key={i} className="bg-[#0f0f0e] hover:bg-[#151513] transition-colors duration-300 text-center py-7 px-6 flex flex-col items-center gap-1">
+                  <div className="font-display text-accent leading-none" style={{ fontSize: 'clamp(1.6rem,3vw,2.4rem)' }}>
                     <CountUp target={stat.target} suffix={stat.suffix} prefix={stat.prefix} />
                   </div>
-                  <span className="font-body text-[0.6rem] tracking-[0.1em] uppercase text-text/25 leading-tight text-center mt-1">{stat.label}</span>
+                  <span className="font-body text-[0.62rem] tracking-[0.1em] uppercase text-text/25 leading-tight text-center mt-1">{stat.label}</span>
                 </div>
               ))}
             </div>

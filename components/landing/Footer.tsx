@@ -3,13 +3,11 @@ import Image from 'next/image'
 
 const navLinks = [
   { label: 'Sobre Nosotros', href: '#sobre-nosotros' },
-  { label: 'Por qué APZ',    href: '#por-que-apz' },
-  { label: 'El Deporte',     href: '#sobre-paintball' },
   { label: 'Modalidades',    href: '#experiencia' },
-  { label: 'Proceso',        href: '#proceso' },
-  { label: 'Precios',        href: '#precios' },
   { label: 'Galería',        href: '#galeria' },
+  { label: 'Precios',        href: '#precios' },
   { label: 'Reservas',       href: '#reservas' },
+  { label: 'Por qué APZ',    href: '#por-que-apz' },
   { label: 'FAQ',            href: '#faq' },
 ]
 

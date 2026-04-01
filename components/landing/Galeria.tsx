@@ -33,7 +33,7 @@ export default function Galeria() {
           transition={{ duration: 0.6 }}
           className="mb-14"
         >
-          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">007 / Galería</span>
+          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-4">003 / Galería</span>
           <h2 className="heading-shimmer section-title text-[clamp(2.4rem,5.5vw,4rem)] leading-[0.95] mb-4">
             El campo en <span className="text-accent">acción</span>
           </h2>

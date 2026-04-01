@@ -6,11 +6,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const links = [
   { label: 'Nosotros',   href: '#sobre-nosotros' },
-  { label: 'Por qué APZ', href: '#por-que-apz' },
   { label: 'Modalidades', href: '#experiencia' },
-  { label: 'Precios',    href: '#precios' },
   { label: 'Galería',    href: '#galeria' },
-  { label: 'Reservas',   href: '#reservas' },
+  { label: 'Precios',    href: '#precios' },
+  { label: 'Por qué APZ', href: '#por-que-apz' },
   { label: 'FAQ',        href: '#faq' },
 ]
 

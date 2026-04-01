@@ -104,7 +104,7 @@ export default function Precios() {
           transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
           className="text-center mb-16"
         >
-          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-5">006 / Tarifas</span>
+          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-5">004 / Tarifas</span>
           <h2 className="heading-shimmer section-title text-[clamp(2.6rem,5.5vw,4.2rem)] leading-[0.92] mb-4">
             Precios y <span className="text-accent">Tarifas</span>
           </h2>

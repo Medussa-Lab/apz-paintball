@@ -81,7 +81,7 @@ export default function PorQueAPZ() {
           transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
           className="mb-16"
         >
-          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-5">002 / Por qué APZ</span>
+          <span className="inline-block font-body text-[0.65rem] font-medium tracking-[0.22em] uppercase text-accent mb-5">006 / Por qué APZ</span>
           <h2 className="heading-shimmer section-title text-[clamp(2.6rem,5.5vw,4.2rem)] leading-[0.92] mb-4">
             El campo que <span className="text-accent">domina</span>
           </h2>
@@ -93,7 +93,7 @@ export default function PorQueAPZ() {
           transition={{ duration: 0.8, delay: 0.1, ease: [0.4, 0, 0.2, 1] }}
           className="relative mb-20"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/[0.06] border border-white/[0.06] rounded-tactical overflow-hidden">
+          <div className="grid grid-cols-2 divide-x divide-y divide-white/[0.06] border border-white/[0.06] rounded-tactical overflow-hidden">
             {STATS.map((stat, i) => (
               <div key={i} className="bg-[#0d0d0c] hover:bg-[#131311] transition-colors duration-300 py-10 px-6 text-center group">
                 <div className="font-display text-accent leading-none mb-3 group-hover:scale-105 transition-transform duration-300" style={{ fontSize: 'clamp(2.2rem,5vw,3.5rem)' }}>
