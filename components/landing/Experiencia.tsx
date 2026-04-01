@@ -1,13 +1,15 @@
 'use client'
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 const gameModes = [
   {
     id: 'base',
-    category: 'estrategia',
+    category: 'juegos',
     nombre: 'Capturar la Base',
     sub: 'El clásico del combate táctico',
+    img: '/modalidades/captura-la-base.png',
     icono: '🏴',
     dificultad: 4,
     diffLabel: 'Avanzado',
@@ -22,9 +24,10 @@ const gameModes = [
   },
   {
     id: 'capitan',
-    category: 'estrategia',
+    category: 'juegos',
     nombre: 'El Capitán',
     sub: 'Protege o elimina al objetivo',
+    img: '/modalidades/el-capitan.png',
     icono: '🎖️',
     dificultad: 5,
     diffLabel: 'Extremo',
@@ -39,9 +42,10 @@ const gameModes = [
   },
   {
     id: 'bandera',
-    category: 'estrategia',
+    category: 'juegos',
     nombre: 'Bandera Central',
     sub: 'Dos equipos, una sola bandera',
+    img: '/modalidades/bandera-central.png',
     icono: '🚩',
     dificultad: 3,
     diffLabel: 'Medio',
@@ -56,9 +60,10 @@ const gameModes = [
   },
   {
     id: 'nocturno',
-    category: 'nocturno',
+    category: 'tipos',
     nombre: 'Paintball Nocturno',
     sub: 'Oscuridad, adrenalina y bolas fluorescentes',
+    img: null,
     icono: '🌙',
     dificultad: 5,
     diffLabel: 'Extremo',
@@ -74,9 +79,10 @@ const gameModes = [
   },
   {
     id: 'infantil',
-    category: 'familiar',
+    category: 'tipos',
     nombre: 'Paintball Infantil',
     sub: 'Desde 8 años · JT Splatmaster',
+    img: null,
     icono: '🛡️',
     dificultad: 1,
     diffLabel: 'Iniciación',
@@ -93,22 +99,18 @@ const gameModes = [
 ]
 
 const FILTERS = [
-  { id: 'all',       label: 'Todas' },
-  { id: 'estrategia', label: 'Estrategia' },
-  { id: 'nocturno',  label: 'Nocturno' },
-  { id: 'familiar',  label: 'Familiar' },
+  { id: 'all',    label: 'Todos' },
+  { id: 'juegos', label: 'Juegos' },
+  { id: 'tipos',  label: 'Tipos de Paintball' },
 ]
 
 const BANNER_COLORS: Record<string, string> = {
-  base:     'from-[#1a1610] to-[#0d0c0b]',
-  capitan:  'from-[#1a1208] to-[#0d0c0b]',
-  bandera:  'from-[#0e1510] to-[#0d0c0b]',
   nocturno: 'from-[#0e0e1a] to-[#080810]',
-  infantil: 'from-[#111510] to-[#0d0c0b]',
+  infantil:  'from-[#111510] to-[#0d0c0b]',
 }
 
 export default function Experiencia() {
-  const [filter, setFilter] = useState('all')
+  const [filter, setFilter] = useState('juegos')
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-10%' })
 
@@ -170,35 +172,51 @@ export default function Experiencia() {
               }`}
             >
               {/* Banner top */}
-              <div className={`relative h-36 bg-gradient-to-br ${BANNER_COLORS[mode.id]} overflow-hidden flex items-center justify-center`}>
-                {/* Subtle grain texture */}
-                <div className="absolute inset-0 opacity-[0.04]" style={{
-                  backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")',
-                }} />
-                {/* Accent corner */}
-                {mode.featured && (
-                  <div className="absolute bottom-0 right-0 w-1/3 h-1/3 border-b-2 border-r-2 border-accent/50 rounded-br pointer-events-none" />
-                )}
-                {/* Icon */}
-                <span className="text-6xl opacity-70 select-none group-hover:scale-110 transition-transform duration-500">
-                  {mode.icono}
-                </span>
-                {/* Tag badge */}
-                {mode.tag && (
-                  <span className={`absolute top-3 right-3 font-display text-[0.6rem] tracking-[0.12em] uppercase px-2.5 py-1 rounded ${
-                    mode.featured ? 'bg-accent text-bg' : 'bg-[#1e1e1c] text-accent/80 border border-accent/20'
-                  }`}>
-                    {mode.tag}
-                  </span>
-                )}
-                {/* Difficulty badge */}
-                <div className="absolute bottom-3 left-4 flex items-center gap-1.5">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <div key={j} className="h-1 w-4 rounded-full" style={{ background: j < mode.dificultad ? '#FFD000' : 'rgba(255,255,255,0.12)' }} />
-                  ))}
-                  <span className="text-[0.65rem] text-text/40 font-body ml-1">{mode.diffLabel}</span>
+              {mode.img ? (
+                <div className="relative h-44 overflow-hidden">
+                  <Image
+                    src={mode.img}
+                    alt={mode.nombre}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  />
+                  {/* Dark overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111110] via-black/20 to-transparent" />
+                  {/* Difficulty bar */}
+                  <div className="absolute bottom-3 left-4 flex items-center gap-1.5">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <div key={j} className="h-1 w-4 rounded-full" style={{ background: j < mode.dificultad ? '#FFD000' : 'rgba(255,255,255,0.15)' }} />
+                    ))}
+                    <span className="text-[0.65rem] text-white/50 font-body ml-1">{mode.diffLabel}</span>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className={`relative h-44 bg-gradient-to-br ${BANNER_COLORS[mode.id]} overflow-hidden flex items-center justify-center`}>
+                  <span className="text-6xl opacity-70 select-none group-hover:scale-110 transition-transform duration-500">
+                    {mode.icono}
+                  </span>
+                  {mode.featured && (
+                    <div className="absolute bottom-0 right-0 w-1/3 h-1/3 border-b-2 border-r-2 border-accent/50 rounded-br pointer-events-none" />
+                  )}
+                  {/* Difficulty bar */}
+                  <div className="absolute bottom-3 left-4 flex items-center gap-1.5">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <div key={j} className="h-1 w-4 rounded-full" style={{ background: j < mode.dificultad ? '#FFD000' : 'rgba(255,255,255,0.12)' }} />
+                    ))}
+                    <span className="text-[0.65rem] text-text/40 font-body ml-1">{mode.diffLabel}</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Tag badge */}
+              {mode.tag && (
+                <span className={`absolute top-3 right-3 font-display text-[0.6rem] tracking-[0.12em] uppercase px-2.5 py-1 rounded z-10 ${
+                  mode.featured ? 'bg-accent text-bg' : 'bg-[#1e1e1c] text-accent/80 border border-accent/20'
+                }`}>
+                  {mode.tag}
+                </span>
+              )}
 
               {/* Body */}
               <div className="p-5 flex flex-col flex-1">
