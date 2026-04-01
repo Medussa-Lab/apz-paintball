@@ -76,7 +76,7 @@ export default function SobreNosotros() {
             {/* Image */}
             <div className="relative rounded-tactical overflow-hidden aspect-[16/10] group">
               <Image
-                src="/gallery/escuadron.png"
+                src="/gallery/ataque2.png"
                 alt="Equipo de paintball en APZ"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -89,13 +89,13 @@ export default function SobreNosotros() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-4 gap-px bg-white/[0.05] rounded-tactical overflow-hidden border border-white/[0.05]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/[0.05] rounded-tactical overflow-hidden border border-white/[0.05]">
               {STATS.map((stat, i) => (
-                <div key={i} className="bg-[#0f0f0e] hover:bg-[#151513] transition-colors duration-300 text-center py-6 px-2 flex flex-col items-center gap-1">
-                  <div className="font-display text-accent leading-none" style={{ fontSize: 'clamp(1.2rem,2.8vw,1.9rem)' }}>
+                <div key={i} className="bg-[#0f0f0e] hover:bg-[#151513] transition-colors duration-300 text-center py-6 px-4 flex flex-col items-center gap-1">
+                  <div className="font-display text-accent leading-none whitespace-nowrap" style={{ fontSize: 'clamp(1.3rem,2.5vw,2rem)' }}>
                     <CountUp target={stat.target} suffix={stat.suffix} prefix={stat.prefix} />
                   </div>
-                  <span className="font-body text-[0.58rem] tracking-[0.1em] uppercase text-text/25 leading-tight text-center">{stat.label}</span>
+                  <span className="font-body text-[0.6rem] tracking-[0.1em] uppercase text-text/25 leading-tight text-center mt-1">{stat.label}</span>
                 </div>
               ))}
             </div>

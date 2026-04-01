@@ -31,9 +31,9 @@ export default function Home() {
           pointerEvents: 'none',
         }} />
         <SobreNosotros />
-        <Experiencia />
-        <SobrePaintball />
         <PorQueAPZ />
+        <SobrePaintball />
+        <Experiencia />
         <Proceso />
         <Precios />
         <Galeria />

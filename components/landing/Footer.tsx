@@ -3,13 +3,37 @@ import Image from 'next/image'
 
 const navLinks = [
   { label: 'Sobre Nosotros', href: '#sobre-nosotros' },
-  { label: 'Modalidades',    href: '#experiencia' },
+  { label: 'Por qué APZ',    href: '#por-que-apz' },
   { label: 'El Deporte',     href: '#sobre-paintball' },
+  { label: 'Modalidades',    href: '#experiencia' },
   { label: 'Proceso',        href: '#proceso' },
   { label: 'Precios',        href: '#precios' },
   { label: 'Galería',        href: '#galeria' },
   { label: 'Reservas',       href: '#reservas' },
   { label: 'FAQ',            href: '#faq' },
+]
+
+const contactItems = [
+  {
+    icon: 'M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z M12 7 m-3 0 a3 3 0 1 0 6 0 a3 3 0 1 0 -6 0',
+    text: 'Av. Nueva York 33-35\nLa Zapateira, A Coruña',
+    href: 'https://maps.app.goo.gl/GsPu9yExTn1DiCJx5',
+  },
+  {
+    icon: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z',
+    text: '981 151 871\n653 101 094\n722 124 321',
+    href: 'tel:981151871',
+  },
+  {
+    icon: 'M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6 12 13 2 6',
+    text: 'info@apzpaintball.com',
+    href: 'mailto:info@apzpaintball.com',
+  },
+  {
+    icon: 'M12 22 a10 10 0 1 0 0-20 a10 10 0 0 0 0 20 M12 6v6l4 2',
+    text: 'Abierto todos los días',
+    href: null,
+  },
 ]
 
 export default function Footer() {
@@ -68,39 +92,47 @@ export default function Footer() {
           {/* Col 3 — Contacto */}
           <div>
             <p className="font-display text-[0.65rem] tracking-[0.25em] text-text/30 uppercase mb-6">Contacto</p>
-            <div className="flex flex-col gap-3 text-sm text-text/45 font-body">
-              <a href="tel:981151871" className="hover:text-accent transition-colors">981 151 871</a>
-              <a href="tel:653101094" className="hover:text-accent transition-colors">653 101 094</a>
-              <a href="tel:722124321" className="hover:text-accent transition-colors">722 124 321</a>
-              <a href="mailto:info@apzpaintball.com" className="hover:text-accent transition-colors">info@apzpaintball.com</a>
-              <span className="text-text/25 text-xs leading-relaxed mt-2">
-                Av. Nueva York 33-35<br />La Zapateira, A Coruña
-              </span>
-            </div>
+            <ul className="flex flex-col gap-4">
+              {contactItems.map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-text/45 font-body leading-tight">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 flex-shrink-0 mt-0.5 text-accent/60">
+                    <path d={item.icon} />
+                  </svg>
+                  {item.href ? (
+                    <a href={item.href} className="hover:text-accent transition-colors whitespace-pre-line">{item.text}</a>
+                  ) : (
+                    <span className="whitespace-pre-line">{item.text}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Col 4 — Ubicación */}
           <div>
             <p className="font-display text-[0.65rem] tracking-[0.25em] text-text/30 uppercase mb-6">Ubicación</p>
-            <div className="rounded-tactical overflow-hidden border border-white/[0.06] mb-3" style={{ height: 160 }}>
+            <a
+              href="https://maps.app.goo.gl/GsPu9yExTn1DiCJx5"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Abrir en Google Maps"
+              className="block relative rounded-lg overflow-hidden border border-white/[0.06] group mb-3"
+            >
               <iframe
                 title="APZ Paintball"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2898.3569812345678!2d-8.449400!3d43.356700!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2e7c000000000%3A0x0!2sAv.+Nueva+York+33-35%2C+15008+A+Coru%C3%B1a!5e0!3m2!1ses!2ses!4v1"
                 width="100%"
                 height="160"
-                style={{ border: 0, filter: 'grayscale(1) brightness(0.5) contrast(1.2)' }}
+                style={{ border: 0, filter: 'grayscale(1) brightness(0.5) contrast(1.2)', display: 'block', pointerEvents: 'none' }}
                 allowFullScreen={false}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-            </div>
-            <a
-              href="https://maps.app.goo.gl/GsPu9yExTn1DiCJx5"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-accent/70 text-xs hover:text-accent transition-colors font-body"
-            >
-              Ver en Google Maps →
+              <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/50 transition-all duration-300">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 font-display text-[0.72rem] tracking-[0.12em] uppercase text-bg bg-accent px-4 py-2 rounded">
+                  Ver en Google Maps →
+                </span>
+              </div>
             </a>
           </div>
 
