@@ -45,7 +45,7 @@ export default function AdminBlockSlots() {
     load()
   }
 
-  const inputCls = "bg-[#0a0a0a] border border-white/10 rounded px-4 py-2.5 text-white text-sm focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/20 transition-all w-full placeholder:text-white/20"
+  const inputCls = "bg-[#0a0a0a] border border-white/10 rounded px-4 py-2.5 text-white text-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all w-full placeholder:text-white/20"
 
   return (
     <div>
@@ -59,12 +59,12 @@ export default function AdminBlockSlots() {
             <div className="flex flex-col gap-1.5">
               <label className="text-[0.7rem] font-head font-semibold uppercase tracking-wider text-white/35">Cockpit</label>
               <select value={form.cockpitId} onChange={e => setForm(f => ({ ...f, cockpitId: parseInt(e.target.value) || 0 }))} className={inputCls}>
-                <option value={0}>Todos los cockpits</option>
+                <option value={0}>Todos los campos</option>
                 {Array.from({ length: 8 }, (_, i) => <option key={i} value={i+1}>Cockpit {i+1}</option>)}
               </select>
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[0.7rem] font-head font-semibold uppercase tracking-wider text-white/35">Fecha <span className="text-blue">*</span></label>
+              <label className="text-[0.7rem] font-head font-semibold uppercase tracking-wider text-white/35">Fecha <span className="text-accent">*</span></label>
               <input type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} required className={inputCls} />
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -101,7 +101,7 @@ export default function AdminBlockSlots() {
                 <div key={s.id} className="flex items-center gap-3 p-3 bg-[#0a0a0a] rounded border border-danger/20">
                   <span className="w-1.5 h-1.5 rounded-full bg-danger flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-white/70 text-sm">{s.cockpit_id ? `Cockpit ${s.cockpit_id}` : 'Todos los cockpits'} · {s.date}</p>
+                    <p className="text-white/70 text-sm">{s.cockpit_id ? `Campo ${s.cockpit_id}` : 'Todos los campos'} · {s.date}</p>
                     <p className="text-white/35 text-xs">{s.start_time}–{s.end_time} {s.reason && `· ${s.reason}`}</p>
                   </div>
                   <button onClick={() => remove(s.id)} className="text-xs text-danger/50 hover:text-danger transition-colors font-head uppercase tracking-wider">Eliminar</button>

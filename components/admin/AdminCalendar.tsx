@@ -6,7 +6,7 @@ import { format, startOfWeek, addDays, eachDayOfInterval, isSameDay } from 'date
 import { es } from 'date-fns/locale'
 
 // ── Event colors ──────────────────────────────────────────────────
-const EVENT_COLORS = ['#0066FF', '#8B5CF6', '#F59E0B', '#10B981', '#EF4444', '#EC4899']
+const EVENT_COLORS = ['#FFD000', '#8B5CF6', '#F59E0B', '#10B981', '#EF4444', '#EC4899']
 
 interface CalendarEvent {
   id:           string
@@ -19,7 +19,7 @@ interface CalendarEvent {
 
 // ── Constants ─────────────────────────────────────────────────────
 const COCKPIT_COLORS: Record<number, string> = {
-  1: '#F59E0B', 2: '#8B5CF6', 3: '#0066FF',
+  1: '#F59E0B', 2: '#8B5CF6', 3: '#FFD000',
   4: '#3B82F6', 5: '#0EA5E9', 6: '#06B6D4', 7: '#00AACC', 8: '#3385FF',
 }
 const STATUS_COLORS: Record<BookingStatus, string> = {
@@ -66,12 +66,12 @@ function tlHeight(start: string, end: string): number {
 function cockpitLabel(ids: number[]): string {
   if (!Array.isArray(ids) || ids.length === 0) return '—'
   if (ids.length === 1) return `C${ids[0]}`
-  return ids.map(id => `C${id}`).join(', ')
+  return ids.map(id => `Campo ${id}`).join(', ')
 }
 
 function primaryColor(ids: number[]): string {
-  if (!Array.isArray(ids) || ids.length === 0) return '#0066FF'
-  return COCKPIT_COLORS[ids[0]] || '#0066FF'
+  if (!Array.isArray(ids) || ids.length === 0) return '#FFD000'
+  return COCKPIT_COLORS[ids[0]] || '#FFD000'
 }
 
 // ── Overlap layout ────────────────────────────────────────────────
@@ -121,7 +121,7 @@ function BookingModal({
   const rows: [string, string][] = [
     ['Fecha',     b.date],
     ['Horario',   `${hhmm(b.start_time)} – ${hhmm(b.end_time)}`],
-    ['Cockpits',  cockpitLabel(b.cockpit_ids)],
+    ['Campos',  cockpitLabel(b.cockpit_ids)],
     ['Sesión',    b.session_type?.name || `#${b.session_type_id}`],
     ['Cliente',   b.customer_name],
     ['Email',     b.customer_email],
@@ -251,7 +251,7 @@ function AddEventModal({ onAdd, onClose }: {
     onClose()
   }
 
-  const inp = "w-full bg-[#0a0a0a] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-blue focus:outline-none transition-all placeholder:text-white/20"
+  const inp = "w-full bg-[#0a0a0a] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-accent focus:outline-none transition-all placeholder:text-white/20"
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -303,7 +303,7 @@ function AddEventModal({ onAdd, onClose }: {
                 Cancelar
               </button>
               <button type="submit"
-                className="flex-1 py-2 text-xs font-head uppercase tracking-wider rounded bg-blue/20 border border-blue/40 text-blue hover:bg-blue/30 transition-all">
+                className="flex-1 py-2 text-xs font-head uppercase tracking-wider rounded bg-accent/20 border border-accent/40 text-accent hover:bg-accent/30 transition-all">
                 Crear evento
               </button>
             </div>
@@ -461,7 +461,7 @@ export default function AdminCalendar() {
             <div className="w-px h-6 bg-white/[0.07]" />
             <div className="text-center">
               <p className="text-white/25 text-[0.6rem] font-head uppercase tracking-wider">Estimado</p>
-              <p className="font-head font-bold text-blue text-sm">€{revenue}</p>
+              <p className="font-head font-bold text-accent text-sm">€{revenue}</p>
             </div>
             {realRevenue > 0 && (
               <>
@@ -489,7 +489,7 @@ export default function AdminCalendar() {
               <button
                 key={mode}
                 onClick={() => { setViewMode(mode); if (mode === 'week') setViewStart(startOfWeek(new Date(), { weekStartsOn: 1 })); else setViewStart(new Date()) }}
-                className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 transition-all border-r border-white/10 last:border-r-0 ${viewMode === mode ? 'bg-blue/20 text-blue' : 'text-white/30 hover:text-white/60'}`}
+                className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 transition-all border-r border-white/10 last:border-r-0 ${viewMode === mode ? 'bg-accent/20 text-accent' : 'text-white/30 hover:text-white/60'}`}
               >
                 {label}
               </button>
@@ -499,7 +499,7 @@ export default function AdminCalendar() {
           {/* Navigation */}
           <div className="flex items-center gap-1.5">
             <button onClick={navBack}
-              className="w-8 h-8 rounded border border-white/10 text-white/40 hover:border-blue hover:text-blue transition-all flex items-center justify-center"
+              className="w-8 h-8 rounded border border-white/10 text-white/40 hover:border-accent hover:text-accent transition-all flex items-center justify-center"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
                 <path d="M15 18l-6-6 6-6"/>
@@ -508,14 +508,14 @@ export default function AdminCalendar() {
             <button onClick={goToday}
               className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 rounded border transition-all ${
                 isCurrentPeriod
-                  ? 'border-blue/40 text-blue bg-blue/10'
-                  : 'border-white/10 text-white/30 hover:border-blue hover:text-blue'
+                  ? 'border-accent/40 text-accent bg-accent/10'
+                  : 'border-white/10 text-white/30 hover:border-accent hover:text-accent'
               }`}
             >
               Hoy
             </button>
             <button onClick={navFwd}
-              className="w-8 h-8 rounded border border-white/10 text-white/40 hover:border-blue hover:text-blue transition-all flex items-center justify-center"
+              className="w-8 h-8 rounded border border-white/10 text-white/40 hover:border-accent hover:text-accent transition-all flex items-center justify-center"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
                 <path d="M9 18l6-6-6-6"/>
@@ -543,12 +543,12 @@ export default function AdminCalendar() {
               return (
                 <div
                   key={day.toISOString()}
-                  className={`text-center py-3 border-l border-white/[0.04] ${isToday ? 'bg-blue/[0.04]' : ''}`}
+                  className={`text-center py-3 border-l border-white/[0.04] ${isToday ? 'bg-accent/[0.04]' : ''}`}
                 >
-                  <p className={`text-[0.65rem] font-head font-semibold uppercase tracking-wider ${isToday ? 'text-blue' : 'text-white/25'}`}>
+                  <p className={`text-[0.65rem] font-head font-semibold uppercase tracking-wider ${isToday ? 'text-accent' : 'text-white/25'}`}>
                     {format(day, 'EEE', { locale: es })}
                   </p>
-                  <p className={`text-xl font-head font-bold mt-0.5 leading-none ${isToday ? 'text-blue' : 'text-white/60'}`}>
+                  <p className={`text-xl font-head font-bold mt-0.5 leading-none ${isToday ? 'text-accent' : 'text-white/60'}`}>
                     {format(day, 'd')}
                   </p>
                   {dayCount > 0 && (
@@ -592,7 +592,7 @@ export default function AdminCalendar() {
                   return (
                     <div
                       key={day.toISOString()}
-                      className={`border-l border-white/[0.04] relative ${isToday ? 'bg-blue/[0.015]' : ''}`}
+                      className={`border-l border-white/[0.04] relative ${isToday ? 'bg-accent/[0.015]' : ''}`}
                       style={{ height: TL_HEIGHT }}
                     >
                       {/* Hour grid lines */}
@@ -619,8 +619,8 @@ export default function AdminCalendar() {
                           style={{ top: nowTop }}
                         >
                           <div className="relative flex items-center">
-                            <div className="w-2 h-2 rounded-full bg-blue flex-shrink-0 -ml-1" />
-                            <div className="flex-1 h-px bg-blue/70" />
+                            <div className="w-2 h-2 rounded-full bg-accent flex-shrink-0 -ml-1" />
+                            <div className="flex-1 h-px bg-accent/70" />
                           </div>
                         </div>
                       )}
@@ -638,9 +638,9 @@ export default function AdminCalendar() {
                               background: 'repeating-linear-gradient(45deg,rgba(255,255,255,0.03),rgba(255,255,255,0.03) 2px,transparent 2px,transparent 8px)',
                               borderLeft: '2px solid rgba(255,255,255,0.15)',
                             }}
-                            title={`Bloqueado: ${s.reason || 'Sin motivo'}${s.cockpit_id ? ` · C${s.cockpit_id}` : ' · Todos'}`}
+                            title={`Bloqueado: ${s.reason || 'Sin motivo'}${s.cockpit_id ? ` · Campo ${s.cockpit_id}` : ' · Todos'}`}
                           >
-                            <p className="text-[0.55rem] text-white/30 px-1.5 pt-1 truncate">{s.reason || 'Bloqueado'}{s.cockpit_id ? ` — C${s.cockpit_id}` : ''}</p>
+                            <p className="text-[0.55rem] text-white/30 px-1.5 pt-1 truncate">{s.reason || 'Bloqueado'}{s.cockpit_id ? ` — Campo ${s.cockpit_id}` : ''}</p>
                           </div>
                         )
                       })}
@@ -710,7 +710,7 @@ export default function AdminCalendar() {
       {/* Legend */}
       <div className="flex items-center gap-4 mt-3 flex-wrap">
         {[
-          { color: '#0066FF', label: 'Confirmado' },
+          { color: '#FFD000', label: 'Confirmado' },
           { color: '#00FF88', label: 'Asistió' },
           { color: '#FF5050', label: 'No show' },
           { color: 'rgba(255,255,255,0.15)', label: 'Cancelado' },
@@ -739,13 +739,13 @@ export default function AdminCalendar() {
             <div className="flex items-center rounded border border-white/10 overflow-hidden">
               {(['list', 'month'] as const).map(v => (
                 <button key={v} onClick={() => setEventView(v)}
-                  className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 transition-all border-r border-white/10 last:border-r-0 ${eventView === v ? 'bg-blue/20 text-blue' : 'text-white/30 hover:text-white/60'}`}>
+                  className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 transition-all border-r border-white/10 last:border-r-0 ${eventView === v ? 'bg-accent/20 text-accent' : 'text-white/30 hover:text-white/60'}`}>
                   {v === 'list' ? 'Lista' : 'Mes'}
                 </button>
               ))}
             </div>
             <button onClick={() => setShowAddEvent(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-head uppercase tracking-wider rounded border border-blue/30 text-blue bg-blue/10 hover:bg-blue/20 transition-all">
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-head uppercase tracking-wider rounded border border-accent/30 text-accent bg-accent/10 hover:bg-accent/20 transition-all">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5"><path d="M12 5v14M5 12h14"/></svg>
               Añadir
             </button>
@@ -798,7 +798,7 @@ export default function AdminCalendar() {
               <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.07]">
                 <button
                   onClick={() => setEventMonth(m => new Date(m.getFullYear(), m.getMonth() - 1, 1))}
-                  className="w-7 h-7 flex items-center justify-center rounded border border-white/10 text-white/40 hover:text-blue hover:border-blue transition-all">
+                  className="w-7 h-7 flex items-center justify-center rounded border border-white/10 text-white/40 hover:text-accent hover:border-accent transition-all">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><path d="M15 18l-6-6 6-6"/></svg>
                 </button>
                 <p className="font-head font-semibold text-sm text-white capitalize">
@@ -806,7 +806,7 @@ export default function AdminCalendar() {
                 </p>
                 <button
                   onClick={() => setEventMonth(m => new Date(m.getFullYear(), m.getMonth() + 1, 1))}
-                  className="w-7 h-7 flex items-center justify-center rounded border border-white/10 text-white/40 hover:text-blue hover:border-blue transition-all">
+                  className="w-7 h-7 flex items-center justify-center rounded border border-white/10 text-white/40 hover:text-accent hover:border-accent transition-all">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><path d="M9 18l6-6-6-6"/></svg>
                 </button>
               </div>
@@ -824,8 +824,8 @@ export default function AdminCalendar() {
                   const isToday_ = isSameDay(day, today)
                   return (
                     <div key={ds}
-                      className={`min-h-[72px] border-r border-b border-white/[0.05] p-1.5 ${isToday_ ? 'bg-blue/[0.06]' : ''} ${!inMonth(day) ? 'opacity-25' : ''}`}>
-                      <p className={`text-[0.65rem] font-head font-semibold leading-none mb-1.5 ${isToday_ ? 'text-blue' : 'text-white/40'}`}>
+                      className={`min-h-[72px] border-r border-b border-white/[0.05] p-1.5 ${isToday_ ? 'bg-accent/[0.06]' : ''} ${!inMonth(day) ? 'opacity-25' : ''}`}>
+                      <p className={`text-[0.65rem] font-head font-semibold leading-none mb-1.5 ${isToday_ ? 'text-accent' : 'text-white/40'}`}>
                         {format(day, 'd')}
                       </p>
                       <div className="space-y-0.5">
@@ -884,12 +884,12 @@ const _fri   = format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), 4), 
 const _sat   = format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), 5), 'yyyy-MM-dd')
 
 const DEMO: Booking[] = [
-  { id:'d1', cockpit_ids:[1], session_type_id:1, customer_name:'Carlos García', customer_email:'carlos@demo.com', customer_phone:'+34 600 111 222', num_people:1, date:_today, start_time:'11:00', end_time:'12:00', status:'confirmed', checked_in:true, notes:null, created_at:'', session_type:{id:1,name:'Individual 1h',duration_minutes:60,price:40,max_people:1,color:'#0066FF'} },
+  { id:'d1', cockpit_ids:[1], session_type_id:1, customer_name:'Carlos García', customer_email:'carlos@demo.com', customer_phone:'+34 600 111 222', num_people:1, date:_today, start_time:'11:00', end_time:'12:00', status:'confirmed', checked_in:true, notes:null, created_at:'', session_type:{id:1,name:'Individual 1h',duration_minutes:60,price:40,max_people:1,color:'#FFD000'} },
   { id:'d2', cockpit_ids:[3,4,5], session_type_id:3, customer_name:'Ana Martínez', customer_email:'ana@demo.com', customer_phone:'+34 600 333 444', num_people:3, date:_today, start_time:'14:00', end_time:'15:00', status:'confirmed', checked_in:null, notes:'Cumpleaños', created_at:'', session_type:{id:3,name:'Grupal 1h',duration_minutes:60,price:30,max_people:8,color:'#8B5CF6'} },
-  { id:'d3', cockpit_ids:[2], session_type_id:1, customer_name:'Pedro López', customer_email:'pedro@demo.com', customer_phone:'', num_people:1, date:_today, start_time:'16:30', end_time:'17:00', status:'no_show', checked_in:false, notes:null, created_at:'', session_type:{id:1,name:'Individual 30min',duration_minutes:30,price:25,max_people:1,color:'#0066FF'} },
+  { id:'d3', cockpit_ids:[2], session_type_id:1, customer_name:'Pedro López', customer_email:'pedro@demo.com', customer_phone:'', num_people:1, date:_today, start_time:'16:30', end_time:'17:00', status:'no_show', checked_in:false, notes:null, created_at:'', session_type:{id:1,name:'Individual 30min',duration_minutes:30,price:25,max_people:1,color:'#FFD000'} },
   { id:'d4', cockpit_ids:[1,2], session_type_id:2, customer_name:'Equipo Fenix', customer_email:'fenix@demo.com', customer_phone:'', num_people:2, date:_today, start_time:'19:00', end_time:'20:00', status:'confirmed', checked_in:null, notes:null, created_at:'', session_type:{id:2,name:'Duo 1h',duration_minutes:60,price:70,max_people:2,color:'#8B5CF6'} },
-  { id:'d5', cockpit_ids:[1], session_type_id:1, customer_name:'Mario Rossi', customer_email:'mario@demo.com', customer_phone:'', num_people:1, date:_tue, start_time:'12:00', end_time:'13:00', status:'confirmed', checked_in:null, notes:null, created_at:'', session_type:{id:1,name:'Individual 1h',duration_minutes:60,price:40,max_people:1,color:'#0066FF'} },
-  { id:'d6', cockpit_ids:[3], session_type_id:1, customer_name:'Lucía Torres', customer_email:'lucia@demo.com', customer_phone:'', num_people:1, date:_wed, start_time:'17:00', end_time:'18:00', status:'cancelled', checked_in:null, notes:null, created_at:'', session_type:{id:1,name:'Individual 1h',duration_minutes:60,price:40,max_people:1,color:'#0066FF'} },
+  { id:'d5', cockpit_ids:[1], session_type_id:1, customer_name:'Mario Rossi', customer_email:'mario@demo.com', customer_phone:'', num_people:1, date:_tue, start_time:'12:00', end_time:'13:00', status:'confirmed', checked_in:null, notes:null, created_at:'', session_type:{id:1,name:'Individual 1h',duration_minutes:60,price:40,max_people:1,color:'#FFD000'} },
+  { id:'d6', cockpit_ids:[3], session_type_id:1, customer_name:'Lucía Torres', customer_email:'lucia@demo.com', customer_phone:'', num_people:1, date:_wed, start_time:'17:00', end_time:'18:00', status:'cancelled', checked_in:null, notes:null, created_at:'', session_type:{id:1,name:'Individual 1h',duration_minutes:60,price:40,max_people:1,color:'#FFD000'} },
   { id:'d7', cockpit_ids:[1,2,3,4,5,6,7,8], session_type_id:5, customer_name:'Empresa Acme S.L.', customer_email:'biz@demo.com', customer_phone:'+34 600 777 888', num_people:20, date:_sat, start_time:'18:00', end_time:'20:00', status:'confirmed', checked_in:null, notes:'Team building', created_at:'', session_type:{id:5,name:'Evento Premium',duration_minutes:120,price:500,max_people:50,color:'#F59E0B'} },
-  { id:'d8', cockpit_ids:[2], session_type_id:1, customer_name:'Sergio Blanco', customer_email:'sergio@demo.com', customer_phone:'', num_people:1, date:_fri, start_time:'11:30', end_time:'12:00', status:'confirmed', checked_in:null, notes:null, created_at:'', session_type:{id:1,name:'Individual 30min',duration_minutes:30,price:25,max_people:1,color:'#0066FF'} },
+  { id:'d8', cockpit_ids:[2], session_type_id:1, customer_name:'Sergio Blanco', customer_email:'sergio@demo.com', customer_phone:'', num_people:1, date:_fri, start_time:'11:30', end_time:'12:00', status:'confirmed', checked_in:null, notes:null, created_at:'', session_type:{id:1,name:'Individual 30min',duration_minutes:30,price:25,max_people:1,color:'#FFD000'} },
 ]

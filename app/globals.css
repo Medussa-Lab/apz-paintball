@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500&display=swap');
+
 :root {
   --bg: #080807;
   --accent: #FFD000;
@@ -193,4 +195,30 @@ main, header, footer, section { position: relative; z-index: 1; }
 @media (max-width: 768px) {
   body { cursor: auto; }
   .cursor-tactical { display: none; }
+}
+
+/* Admin panel: normal cursor, no tactical crosshair */
+.admin-panel,
+.admin-panel * {
+  cursor: auto !important;
+}
+.admin-panel .cursor-tactical {
+  display: none !important;
+}
+.admin-panel button,
+.admin-panel a,
+.admin-panel [role="button"],
+.admin-panel label,
+.admin-panel select,
+.admin-panel input {
+  cursor: pointer !important;
+}
+.admin-panel input[type="text"],
+.admin-panel input[type="email"],
+.admin-panel input[type="password"],
+.admin-panel input[type="number"],
+.admin-panel input[type="date"],
+.admin-panel input[type="time"],
+.admin-panel textarea {
+  cursor: text !important;
 }

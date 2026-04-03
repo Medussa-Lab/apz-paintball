@@ -34,7 +34,7 @@ const NAV = [
   { href: '/admin',             label: 'Dashboard',  Icon: IconGrid },
   { href: '/admin/bookings',    label: 'Reservas',   Icon: IconCalendar },
   { href: '/admin/calendar',    label: 'Calendario', Icon: IconCalendarDots },
-  { href: '/admin/cockpits',    label: 'Cockpits',   Icon: IconCockpit },
+  { href: '/admin/cockpits',    label: 'Campos',     Icon: IconCockpit },
   { href: '/admin/metricas',    label: 'Métricas',   Icon: IconMetrics },
   { href: '/admin/block-slots', label: 'Bloquear',   Icon: IconBlock },
   { href: '/admin/settings',    label: 'Ajustes',    Icon: IconSettings },
@@ -177,23 +177,23 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       <div className="min-h-screen bg-[#060606] flex items-center justify-center px-4">
         <div className="w-full max-w-sm">
           <div className="text-center mb-8">
-            <Image src="/assets/logotipo-gzsimlab-sinfondo.png" alt="GZ Simlab" width={160} height={80} className="h-20 w-auto mx-auto mb-4" />
-            <h1 className="font-head font-bold text-2xl text-white">Panel de Administración</h1>
+            <Image src="/logo.png" alt="APZ Paintball" width={80} height={80} className="h-20 w-auto mx-auto mb-4" unoptimized />
+            <h1 className="font-display font-bold text-2xl text-white">Panel de Administración</h1>
           </div>
           <form onSubmit={login} className="bg-[#111] border border-white/[0.07] rounded-xl p-6 flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-[0.72rem] font-head font-semibold tracking-[0.1em] uppercase text-white/40">Email</label>
               <input type="email" value={email} onChange={e => setEmail(e.target.value)} required
-                className="bg-[#0a0a0a] border border-white/10 rounded px-4 py-2.5 text-white text-sm focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/20 transition-all" />
+                className="bg-[#0a0a0a] border border-white/10 rounded px-4 py-2.5 text-white text-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all" />
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-[0.72rem] font-head font-semibold tracking-[0.1em] uppercase text-white/40">Contraseña</label>
               <input type="password" value={pass} onChange={e => setPass(e.target.value)} required
-                className="bg-[#0a0a0a] border border-white/10 rounded px-4 py-2.5 text-white text-sm focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue/20 transition-all" />
+                className="bg-[#0a0a0a] border border-white/10 rounded px-4 py-2.5 text-white text-sm focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20 transition-all" />
             </div>
             {err && <p className="text-danger text-xs">{err}</p>}
             <button type="submit" disabled={loading}
-              className="w-full py-3 bg-blue text-white font-head font-semibold text-sm tracking-wider uppercase rounded hover:bg-blueL transition-all duration-200 disabled:opacity-50">
+              className="w-full py-3 bg-accent text-black font-head font-semibold text-sm tracking-wider uppercase rounded hover:bg-accent/80 transition-all duration-200 disabled:opacity-50">
               {loading ? 'Entrando…' : 'Entrar'}
             </button>
           </form>
@@ -211,8 +211,8 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         <div className={`border-b border-white/[0.06] flex items-center ${collapsed ? 'justify-center p-3' : 'p-4'}`}>
           {!collapsed && (
             <div className="flex-1 min-w-0">
-              <Image src="/assets/logotipo-gzsimlab-sinfondo.png" alt="GZ Simlab" width={200} height={100} className="h-auto w-full max-h-28 object-contain" />
-              <p className="text-[0.6rem] text-white/25 font-head uppercase tracking-widest mt-1">Admin Panel</p>
+              <Image src="/logo.png" alt="APZ Paintball" width={80} height={80} className="h-auto w-16 object-contain" unoptimized />
+              <p className="text-[0.6rem] text-white/25 font-display uppercase tracking-widest mt-1">Admin Panel</p>
             </div>
           )}
           <button
@@ -234,7 +234,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
               <Link key={href} href={href}
                 title={collapsed ? label : undefined}
                 className={`flex items-center ${collapsed ? 'justify-center px-0' : 'gap-3 px-3'} py-2.5 rounded mb-1 text-sm font-head font-medium transition-all duration-200 ${
-                  active ? 'bg-blue/10 text-blue border border-blue/20' : 'text-white/40 hover:text-white hover:bg-white/5'
+                  active ? 'bg-accent/10 text-accent border border-accent/20' : 'text-white/40 hover:text-white hover:bg-white/5'
                 }`}
               >
                 <Icon />
@@ -246,22 +246,22 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
         {/* ── New bookings from clients ── */}
         {visibleNew.length > 0 && (
-          <div className={`border-t border-blue/20 bg-blue/[0.04] ${collapsed ? 'p-2' : 'p-3'}`}>
+          <div className={`border-t border-accent/20 bg-accent/[0.04] ${collapsed ? 'p-2' : 'p-3'}`}>
             {collapsed ? (
               <Link href="/admin/bookings" title={`${visibleNew.length} nueva${visibleNew.length !== 1 ? 's' : ''} reserva${visibleNew.length !== 1 ? 's' : ''}`}
                 className="flex items-center justify-center w-full py-1 relative">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4 text-blue/70">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-4 h-4 text-accent/70">
                   <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
                 </svg>
-                <span className="absolute top-0 right-1 min-w-[16px] h-4 flex items-center justify-center rounded-full bg-blue text-[0.55rem] font-bold text-white px-0.5">
+                <span className="absolute top-0 right-1 min-w-[16px] h-4 flex items-center justify-center rounded-full bg-accent text-[0.55rem] font-bold text-white px-0.5">
                   {visibleNew.length}
                 </span>
               </Link>
             ) : (
               <>
                 <div className="flex items-center justify-between mb-2 px-1">
-                  <span className="flex items-center gap-1.5 text-[0.6rem] font-head font-semibold uppercase tracking-wider text-blue/80">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue animate-pulse" />
+                  <span className="flex items-center gap-1.5 text-[0.6rem] font-head font-semibold uppercase tracking-wider text-accent/80">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                     Nueva{visibleNew.length !== 1 ? 's' : ''} reserva{visibleNew.length !== 1 ? 's' : ''}
                   </span>
                   <button
@@ -274,10 +274,10 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                 <div className="space-y-1">
                   {visibleNew.map(b => (
                     <Link key={b.id} href="/admin/bookings"
-                      className="flex items-center gap-2 px-2 py-1.5 rounded bg-blue/10 border border-blue/20 hover:border-blue/40 transition-all group">
+                      className="flex items-center gap-2 px-2 py-1.5 rounded bg-accent/10 border border-accent/20 hover:border-accent/40 transition-all group">
                       <div className="flex-1 min-w-0">
                         <p className="text-[0.7rem] font-head font-semibold text-white/80 truncate">{b.name}</p>
-                        <p className="text-[0.6rem] text-blue/60 truncate">Reserva a las {b.time}</p>
+                        <p className="text-[0.6rem] text-accent/60 truncate">Reserva a las {b.time}</p>
                       </div>
                       <button
                         onClick={e => { e.preventDefault(); e.stopPropagation(); setNewDismissed(prev => new Set(Array.from(prev).concat(b.id))) }}
@@ -358,7 +358,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           </button>
           <Link href="/" target="_blank"
             title={collapsed ? 'Ver sitio web' : undefined}
-            className={`flex items-center ${collapsed ? 'justify-center' : 'gap-2 px-3'} py-1 text-[0.78rem] text-white/25 hover:text-blue transition-colors rounded`}>
+            className={`flex items-center ${collapsed ? 'justify-center' : 'gap-2 px-3'} py-1 text-[0.78rem] text-white/25 hover:text-accent transition-colors rounded`}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-3.5 h-3.5 flex-shrink-0">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
             </svg>

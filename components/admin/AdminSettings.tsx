@@ -4,20 +4,17 @@ import { createClient } from '@/lib/supabase/client'
 import type { Cockpit, SessionType } from '@/lib/types'
 
 // Fallback data using integer IDs matching the real DB
-const FALLBACK_COCKPITS: Cockpit[] = Array.from({ length: 8 }, (_, i) => ({
-  id: i + 1,
-  name: ['Cabina Motion', 'Triple Screen Pro', 'Standard 1', 'Standard 2', 'Standard 3', 'Standard 4', 'Standard 5', 'Standard 6'][i],
-  description: ['F1 Motion Platform', 'Triple Pantalla', 'Cockpit Estándar', 'Cockpit Estándar', 'Cockpit Estándar', 'Cockpit Estándar', 'Cockpit Estándar', 'Cockpit Estándar'][i],
-  is_active: true,
-}))
+const FALLBACK_COCKPITS: Cockpit[] = [
+  { id: 1, name: 'Campo Bosque',     description: '20.000m² de bosque natural',       is_active: true },
+  { id: 2, name: 'Campo Contenedor', description: 'Estructuras y cobertura urbana',   is_active: true },
+]
 
 const FALLBACK_SESSIONS: SessionType[] = [
-  { id: 1, name: 'Individual 30min', duration_minutes: 30,  price: 25,  max_people: 1,  color: '#0066FF', is_active: true },
-  { id: 2, name: 'Individual 1h',    duration_minutes: 60,  price: 40,  max_people: 1,  color: '#0066FF', is_active: true },
-  { id: 3, name: 'Grupal 1h',        duration_minutes: 60,  price: 30,  max_people: 8,  color: '#8B5CF6', is_active: true },
-  { id: 4, name: 'Grupal 1.5h',      duration_minutes: 90,  price: 45,  max_people: 8,  color: '#8B5CF6', is_active: true },
-  { id: 5, name: 'Evento Premium',   duration_minutes: 120, price: 200, max_people: 50, color: '#F59E0B', is_active: true },
-  { id: 6, name: 'Membresía Basic',  duration_minutes: 60,  price: 0,   max_people: 1,  color: '#00AA55', is_active: true },
+  { id: 1, name: 'Entre Semana',       duration_minutes: 120, price: 15,  max_people: 30, color: '#FFD000', is_active: true },
+  { id: 2, name: 'Fin de Semana',      duration_minutes: 120, price: 20,  max_people: 30, color: '#FF9900', is_active: true },
+  { id: 3, name: 'Super Pack',         duration_minutes: 180, price: 35,  max_people: 30, color: '#FF3333', is_active: true },
+  { id: 4, name: 'Paintball Nocturno', duration_minutes: 120, price: 25,  max_people: 30, color: '#8B5CF6', is_active: true },
+  { id: 5, name: 'Paintball Infantil', duration_minutes: 90,  price: 12,  max_people: 30, color: '#00FF88', is_active: true },
   { id: 7, name: 'Membresía Pro',    duration_minutes: 60,  price: 0,   max_people: 1,  color: '#00CC66', is_active: true },
 ]
 
@@ -26,7 +23,7 @@ function Toggle({ on, onToggle }: { on: boolean; onToggle: () => void }) {
     <button
       onClick={onToggle}
       aria-label={on ? 'Desactivar' : 'Activar'}
-      className={`relative w-10 h-5 rounded-full transition-all duration-200 flex-shrink-0 ${on ? 'bg-blue' : 'bg-white/10'}`}
+      className={`relative w-10 h-5 rounded-full transition-all duration-200 flex-shrink-0 ${on ? 'bg-accent' : 'bg-white/10'}`}
     >
       <span
         className="absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all duration-200"
@@ -110,7 +107,7 @@ export default function AdminSettings() {
     ? 'bg-success/10 border border-success/30 text-success'
     : saveState === 'error'
     ? 'bg-danger/10 border border-danger/30 text-danger'
-    : 'bg-blue text-white hover:bg-blueL hover:shadow-blue-sm'
+    : 'bg-accent text-black hover:bg-accent/80 hover:shadow-accent-glow'
 
   return (
     <div>
@@ -132,10 +129,10 @@ export default function AdminSettings() {
         </div>
       ) : (
         <>
-          {/* Cockpits */}
+          {/* Campos */}
           <div className="bg-[#111] border border-white/[0.07] rounded-lg p-6 mb-6">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="font-head font-semibold text-white/70 text-sm uppercase tracking-wider">Cockpits</h2>
+              <h2 className="font-head font-semibold text-white/70 text-sm uppercase tracking-wider">Campos</h2>
               <span className="text-[0.68rem] text-white/25">
                 {cockpits.filter(c => c.is_active).length}/{cockpits.length} activos
               </span>
@@ -189,7 +186,7 @@ export default function AdminSettings() {
                           value={s.price}
                           min={0}
                           onChange={e => updateSession(s.id, 'price', parseInt(e.target.value) || 0)}
-                          className="bg-[#0a0a0a] border border-white/10 rounded px-2.5 py-1 text-white text-sm w-20 focus:border-blue focus:outline-none transition-all"
+                          className="bg-[#0a0a0a] border border-white/10 rounded px-2.5 py-1 text-white text-sm w-20 focus:border-accent focus:outline-none transition-all"
                         />
                       </td>
                       <td className="px-3 py-2.5 text-white/50 text-sm">{s.max_people === 50 ? 'Hasta 50' : s.max_people}</td>

@@ -7,7 +7,7 @@ import type { Booking, BookingStatus, SessionType } from '@/lib/types'
 // ── Constants ────────────────────────────────────────────────────────────────
 const today = format(new Date(), 'yyyy-MM-dd')
 const COCKPIT_IDS    = [1, 2, 3, 4, 5, 6, 7, 8]
-const COCKPIT_COLORS = ['#F59E0B', '#8B5CF6', '#0066FF', '#3B82F6', '#0EA5E9', '#06B6D4', '#00AACC', '#3385FF']
+const COCKPIT_COLORS = ['#F59E0B', '#8B5CF6', '#FFD000', '#3B82F6', '#0EA5E9', '#06B6D4', '#00AACC', '#3385FF']
 const COCKPIT_NAMES  = ['Motion', 'Triple Pro', 'Std 1', 'Std 2', 'Std 3', 'Std 4', 'Std 5', 'Std 6']
 
 const STATUS_COLORS: Record<BookingStatus, string> = {
@@ -26,7 +26,7 @@ const STATUS_LABELS: Record<BookingStatus, string> = {
 function cockpitLabel(cockpit_ids: number[]): string {
   if (!Array.isArray(cockpit_ids) || cockpit_ids.length === 0) return '—'
   if (cockpit_ids.length === 1) return `C${cockpit_ids[0]}`
-  return cockpit_ids.map(id => `C${id}`).join(', ')
+  return cockpit_ids.map(id => `Campo ${id}`).join(', ')
 }
 
 // ── Create Booking Modal ─────────────────────────────────────────────────────
@@ -100,12 +100,12 @@ function CreateBookingModal({
     onCreated(); onClose()
   }
 
-  const inputCls = "bg-[#0a0a0a] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-blue focus:outline-none transition-all w-full placeholder:text-white/20"
+  const inputCls = "bg-[#0a0a0a] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-accent focus:outline-none transition-all w-full placeholder:text-white/20"
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto" onClick={onClose}>
       <div className="bg-[#111] border border-white/[0.1] rounded-xl w-full max-w-lg shadow-[0_24px_80px_rgba(0,0,0,0.9)] my-4" onClick={e => e.stopPropagation()}>
-        <div className="h-0.5 rounded-t-xl bg-blue" />
+        <div className="h-0.5 rounded-t-xl bg-accent" />
         <div className="p-6">
           <div className="flex justify-between items-center mb-5">
             <h3 className="font-head font-bold text-lg text-white">Nueva Reserva</h3>
@@ -143,7 +143,7 @@ function CreateBookingModal({
             </div>
 
             <div>
-              <label className="text-[0.65rem] font-head uppercase tracking-wider text-white/30 block mb-2">Cockpits * (selecciona al menos uno)</label>
+              <label className="text-[0.65rem] font-head uppercase tracking-wider text-white/30 block mb-2">Campos * (selecciona al menos uno)</label>
               <div className="flex flex-wrap gap-2">
                 {COCKPIT_IDS.map((id, ci) => (
                   <button key={id} type="button" onClick={() => toggleCockpit(id)}
@@ -197,7 +197,7 @@ function CreateBookingModal({
                 Cancelar
               </button>
               <button type="submit" disabled={loading}
-                className="flex-1 py-2.5 text-sm font-head font-semibold uppercase tracking-wider rounded bg-blue text-white hover:bg-blue/80 transition-all disabled:opacity-50">
+                className="flex-1 py-2.5 text-sm font-head font-semibold uppercase tracking-wider rounded bg-accent text-black hover:bg-accent/80 transition-all disabled:opacity-50">
                 {loading ? 'Creando…' : 'Crear Reserva'}
               </button>
             </div>
@@ -322,7 +322,7 @@ export default function AdminBookings() {
   }
 
   const exportCSV = () => {
-    const cols = ['ID', 'Fecha', 'Hora', 'Cliente', 'Email', 'Teléfono', 'Cockpits', 'Tipo sesión', 'Personas', 'Estado']
+    const cols = ['ID', 'Fecha', 'Hora', 'Cliente', 'Email', 'Teléfono', 'Campos', 'Tipo sesión', 'Personas', 'Estado']
     const rows = filtered.map(b => [
       b.id, b.date, `${b.start_time}–${b.end_time}`,
       b.customer_name, b.customer_email, b.customer_phone,
@@ -337,7 +337,7 @@ export default function AdminBookings() {
     a.click()
   }
 
-  const selectCls = "bg-[#111] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-blue focus:outline-none transition-all"
+  const selectCls = "bg-[#111] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-accent focus:outline-none transition-all"
 
   return (
     <div>
@@ -347,7 +347,7 @@ export default function AdminBookings() {
         <div className="flex items-center gap-2 flex-wrap">
           <button
             onClick={() => setShowCreate(true)}
-            className="flex items-center gap-2 text-sm font-head font-semibold uppercase tracking-wider px-4 py-2 bg-blue text-white rounded hover:bg-blue/80 transition-all duration-200"
+            className="flex items-center gap-2 text-sm font-head font-semibold uppercase tracking-wider px-4 py-2 bg-accent text-black rounded hover:bg-accent/80 transition-all duration-200"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3.5 h-3.5">
               <path d="M12 5v14M5 12h14" />
@@ -356,7 +356,7 @@ export default function AdminBookings() {
           </button>
           <button
             onClick={exportCSV}
-            className="flex items-center gap-2 text-sm font-head font-semibold uppercase tracking-wider px-4 py-2 border border-white/10 text-white/50 rounded hover:border-blue hover:text-blue transition-all duration-200"
+            className="flex items-center gap-2 text-sm font-head font-semibold uppercase tracking-wider px-4 py-2 border border-white/10 text-white/50 rounded hover:border-accent hover:text-accent transition-all duration-200"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-3.5 h-3.5">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
@@ -374,7 +374,7 @@ export default function AdminBookings() {
             onClick={() => { setDateRange(r); if (r !== 'all') setDateF('') }}
             className={`text-xs font-head font-semibold uppercase tracking-wider px-3 py-1.5 rounded border transition-all ${
               dateRange === r
-                ? 'border-blue bg-blue/10 text-blue'
+                ? 'border-accent bg-accent/10 text-accent'
                 : 'border-white/10 text-white/30 hover:border-white/20 hover:text-white/50'
             }`}
           >
@@ -390,7 +390,7 @@ export default function AdminBookings() {
           placeholder="Buscar nombre, email, ID…"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="bg-[#111] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-blue focus:outline-none transition-all min-w-[180px] flex-1 max-w-xs placeholder:text-white/20"
+          className="bg-[#111] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-accent focus:outline-none transition-all min-w-[180px] flex-1 max-w-xs placeholder:text-white/20"
         />
         <select value={statusF} onChange={e => setStatusF(e.target.value)} className={selectCls}>
           <option value="all">Todos los estados</option>
@@ -399,7 +399,7 @@ export default function AdminBookings() {
           <option value="no_show">No presentado</option>
         </select>
         <select value={String(cockpitF)} onChange={e => setCockpitF(e.target.value === 'all' ? 'all' : Number(e.target.value))} className={selectCls}>
-          <option value="all">Todos los cockpits</option>
+          <option value="all">Todos los campos</option>
           {COCKPIT_IDS.map((id, ci) => (
             <option key={id} value={id}>C{id} {COCKPIT_NAMES[ci]}</option>
           ))}
@@ -437,7 +437,7 @@ export default function AdminBookings() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-white/[0.07]">
-                {['Fecha', 'Hora', 'Cliente', 'Cockpits', 'Tipo', 'Personas', 'Estado', 'Asistencia', 'Acciones'].map(h => (
+                {['Fecha', 'Hora', 'Cliente', 'Campos', 'Tipo', 'Personas', 'Estado', 'Asistencia', 'Acciones'].map(h => (
                   <th key={h} className="text-left text-[0.65rem] font-head font-semibold uppercase tracking-wider text-white/25 px-4 py-3">{h}</th>
                 ))}
               </tr>
@@ -538,7 +538,7 @@ export default function AdminBookings() {
               {([
                 ['Fecha',      selected.date],
                 ['Horario',    `${selected.start_time} – ${selected.end_time}`],
-                ['Cockpits',   cockpitLabel(selected.cockpit_ids)],
+                ['Campos',   cockpitLabel(selected.cockpit_ids)],
                 ['Sesión',     selected.session_type?.name || `#${selected.session_type_id}`],
                 ['Email',      selected.customer_email],
                 ['Teléfono',   selected.customer_phone],
@@ -609,7 +609,7 @@ const DEMO: Booking[] = [
     customer_name: 'Carlos García', customer_email: 'carlos@demo.com', customer_phone: '+34 600 111 222',
     num_people: 1, date: today, start_time: '11:00', end_time: '12:00', status: 'confirmed', notes: null,
     created_at: '2026-03-20T10:00:00Z',
-    session_type: { id: 2, name: 'Individual 1h', duration_minutes: 60, price: 40, max_people: 1, color: '#0066FF' },
+    session_type: { id: 2, name: 'Individual 1h', duration_minutes: 60, price: 40, max_people: 1, color: '#FFD000' },
   },
   {
     id: 'GZ-D3E4F5', cockpit_ids: [3, 4, 5], session_type_id: 3,
@@ -623,7 +623,7 @@ const DEMO: Booking[] = [
     customer_name: 'Pedro López', customer_email: 'pedro@demo.com', customer_phone: '+34 600 555 666',
     num_people: 1, date: format(addDays(new Date(), -1), 'yyyy-MM-dd'), start_time: '16:30', end_time: '17:00', status: 'cancelled', notes: null,
     created_at: '2026-03-19T12:00:00Z',
-    session_type: { id: 1, name: 'Individual 30min', duration_minutes: 30, price: 25, max_people: 1, color: '#0066FF' },
+    session_type: { id: 1, name: 'Individual 30min', duration_minutes: 30, price: 25, max_people: 1, color: '#FFD000' },
   },
   {
     id: 'GZ-J7K8L9', cockpit_ids: [1, 2, 3, 4, 5, 6, 7, 8], session_type_id: 5,
@@ -638,6 +638,6 @@ const DEMO: Booking[] = [
     num_people: 1, date: today, start_time: '17:00', end_time: '18:00', status: 'confirmed', notes: null,
     checked_in: true,
     created_at: '2026-03-22T09:00:00Z',
-    session_type: { id: 2, name: 'Individual 1h', duration_minutes: 60, price: 40, max_people: 1, color: '#0066FF' },
+    session_type: { id: 2, name: 'Individual 1h', duration_minutes: 60, price: 40, max_people: 1, color: '#FFD000' },
   },
 ]

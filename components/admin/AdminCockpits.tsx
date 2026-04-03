@@ -5,9 +5,9 @@ import type { Booking, BlockedSlot } from '@/lib/types'
 import { format, startOfWeek, addDays, eachDayOfInterval, isSameDay } from 'date-fns'
 import { es } from 'date-fns/locale'
 
-const COCKPIT_COLORS = ['#F59E0B', '#8B5CF6', '#0066FF', '#3B82F6', '#0EA5E9', '#06B6D4', '#00AACC', '#3385FF']
-const COCKPIT_NAMES  = ['Motion Cockpit', 'Triple Pro Screen', 'Standard 1', 'Standard 2', 'Standard 3', 'Standard 4', 'Standard 5', 'Standard 6']
-const COCKPIT_DESCS  = ['Plataforma 6DOF', 'Triple pantalla 49"', 'Pantalla 27"', 'Pantalla 27"', 'Pantalla 27"', 'Pantalla 27"', 'Pantalla 27"', 'Pantalla 27"']
+const COCKPIT_COLORS = ['#FFD000', '#8B5CF6']
+const COCKPIT_NAMES  = ['Campo Bosque', 'Campo Contenedor']
+const COCKPIT_DESCS  = ['20.000m² de bosque natural', 'Estructuras y cobertura urbana']
 const today = format(new Date(), 'yyyy-MM-dd')
 
 function hhmm(t: string) { return t ? t.slice(0, 5) : '' }
@@ -23,7 +23,7 @@ export default function AdminCockpits() {
   const [bookings,     setBookings]     = useState<Booking[]>([])
   const [blocked,      setBlocked]      = useState<BlockedSlot[]>([])
   const [cockpits,     setCockpits]     = useState<CockpitDetail[]>(
-    Array.from({ length: 8 }, (_, i) => ({
+    Array.from({ length: 2 }, (_, i) => ({
       id: i + 1, name: COCKPIT_NAMES[i], description: COCKPIT_DESCS[i], is_active: true,
     }))
   )
@@ -111,13 +111,13 @@ export default function AdminCockpits() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="font-head font-bold text-2xl text-white">Cockpits</h1>
+          <h1 className="font-head font-bold text-2xl text-white">Campos</h1>
           <p className="text-white/30 text-sm mt-0.5 capitalize">
             {format(new Date(), "EEEE, d 'de' MMMM", { locale: es })}
           </p>
         </div>
         <button onClick={load}
-          className="w-8 h-8 flex items-center justify-center rounded border border-white/10 text-white/30 hover:border-blue hover:text-blue transition-all">
+          className="w-8 h-8 flex items-center justify-center rounded border border-white/10 text-white/30 hover:border-accent hover:text-accent transition-all">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-3.5 h-3.5">
             <path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
           </svg>
@@ -142,7 +142,7 @@ export default function AdminCockpits() {
           } else if (status === 'active') {
             statusBadge = <span className="flex items-center gap-1 text-[0.6rem] font-head uppercase tracking-wider px-2 py-0.5 rounded border border-success/40 bg-success/10 text-success"><span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />En sesión</span>
           } else if (status.startsWith('next:')) {
-            statusBadge = <span className="text-[0.6rem] font-head uppercase tracking-wider px-2 py-0.5 rounded border border-blue/30 bg-blue/5 text-blue">Próx. {status.slice(5)}</span>
+            statusBadge = <span className="text-[0.6rem] font-head uppercase tracking-wider px-2 py-0.5 rounded border border-accent/30 bg-accent/5 text-accent">Próx. {status.slice(5)}</span>
           } else {
             statusBadge = <span className="text-[0.6rem] font-head uppercase tracking-wider px-2 py-0.5 rounded border border-white/10 text-white/25">Libre hoy</span>
           }
@@ -313,14 +313,14 @@ export default function AdminCockpits() {
                   <h3 className="font-head font-bold text-xs text-white/30 uppercase tracking-wider">Semana</h3>
                   <div className="flex items-center gap-1.5">
                     <button onClick={() => setWeekStart(d => addDays(d, -7))}
-                      className="w-6 h-6 rounded border border-white/10 text-white/30 hover:border-blue hover:text-blue transition-all flex items-center justify-center">
+                      className="w-6 h-6 rounded border border-white/10 text-white/30 hover:border-accent hover:text-accent transition-all flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3"><path d="M15 18l-6-6 6-6"/></svg>
                     </button>
                     <span className="text-white/30 text-[0.65rem] font-head">
                       {format(weekStart, "d MMM", { locale: es })} – {format(addDays(weekStart, 6), "d MMM", { locale: es })}
                     </span>
                     <button onClick={() => setWeekStart(d => addDays(d, 7))}
-                      className="w-6 h-6 rounded border border-white/10 text-white/30 hover:border-blue hover:text-blue transition-all flex items-center justify-center">
+                      className="w-6 h-6 rounded border border-white/10 text-white/30 hover:border-accent hover:text-accent transition-all flex items-center justify-center">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-3 h-3"><path d="M9 18l6-6-6-6"/></svg>
                     </button>
                   </div>
@@ -332,11 +332,11 @@ export default function AdminCockpits() {
                     const dayBkgs = selectedBookings.filter(b => b.date === ds)
                     const dayBlocked = blocked.filter(s => s.date === ds && (s.cockpit_id === selectedCockpit.id || s.cockpit_id === null))
                     return (
-                      <div key={ds} className={`rounded p-2 border min-h-[90px] ${isToday ? 'border-blue/30 bg-blue/[0.03]' : 'border-white/[0.06]'}`}>
-                        <p className={`text-[0.6rem] font-head font-semibold uppercase tracking-wider mb-0.5 ${isToday ? 'text-blue' : 'text-white/25'}`}>
+                      <div key={ds} className={`rounded p-2 border min-h-[90px] ${isToday ? 'border-accent/30 bg-accent/[0.03]' : 'border-white/[0.06]'}`}>
+                        <p className={`text-[0.6rem] font-head font-semibold uppercase tracking-wider mb-0.5 ${isToday ? 'text-accent' : 'text-white/25'}`}>
                           {format(day, 'EEE', { locale: es })}
                         </p>
-                        <p className={`font-head font-bold text-base leading-none mb-1.5 ${isToday ? 'text-blue' : 'text-white/50'}`}>
+                        <p className={`font-head font-bold text-base leading-none mb-1.5 ${isToday ? 'text-accent' : 'text-white/50'}`}>
                           {format(day, 'd')}
                         </p>
                         <div className="flex flex-col gap-0.5">
@@ -400,7 +400,7 @@ export default function AdminCockpits() {
                   <p className="text-white/60 text-sm">{s.reason || 'Sin motivo'}</p>
                   <p className="text-white/25 text-xs">{s.date} · {hhmm(s.start_time)}–{hhmm(s.end_time)}</p>
                 </div>
-                <span className="text-white/25 text-xs font-head">{s.cockpit_id ? `C${s.cockpit_id}` : 'Todos'}</span>
+                <span className="text-white/25 text-xs font-head">{s.cockpit_id ? `Campo ${s.cockpit_id}` : 'Todos'}</span>
               </div>
             ))}
           </div>
@@ -412,7 +412,7 @@ export default function AdminCockpits() {
 
 // ── Demo data ─────────────────────────────────────────────────────
 const _mon = format(startOfWeek(new Date(), { weekStartsOn: 1 }), 'yyyy-MM-dd')
-const DEMO_SESSION = { id: 1, name: 'Individual 1h', duration_minutes: 60, price: 40, max_people: 1, color: '#0066FF' }
+const DEMO_SESSION = { id: 1, name: 'Individual 1h', duration_minutes: 60, price: 40, max_people: 1, color: '#FFD000' }
 
 const DEMO_BOOKINGS: Booking[] = [
   { id:'c1', cockpit_ids:[1], session_type_id:1, customer_name:'Carlos García', customer_email:'carlos@demo.com', customer_phone:'', num_people:1, date:today, start_time:'11:00', end_time:'12:00', status:'confirmed', checked_in:true, notes:null, created_at:'', session_type:DEMO_SESSION },

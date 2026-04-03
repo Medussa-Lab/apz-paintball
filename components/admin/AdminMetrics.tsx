@@ -9,9 +9,9 @@ import {
   PieChart, Pie, Cell, LineChart, Line, CartesianGrid,
 } from 'recharts'
 
-const COCKPIT_COLORS = ['#F59E0B', '#8B5CF6', '#0066FF', '#3B82F6', '#0EA5E9', '#06B6D4', '#00AACC', '#3385FF']
-const COCKPIT_NAMES  = ['Motion', 'Triple Pro', 'Std 1', 'Std 2', 'Std 3', 'Std 4', 'Std 5', 'Std 6']
-const SESSION_COLORS = ['#0066FF', '#8B5CF6', '#F59E0B', '#00FF88', '#FF3333', '#00AACC']
+const COCKPIT_COLORS = ['#FFD000', '#8B5CF6']
+const COCKPIT_NAMES  = ['Bosque', 'Contenedor']
+const SESSION_COLORS = ['#FFD000', '#FF9900', '#FF3333', '#8B5CF6', '#00FF88']
 const today = format(new Date(), 'yyyy-MM-dd')
 
 type RangePeriod = '30d' | '90d' | '1y'
@@ -198,7 +198,7 @@ export default function AdminMetrics() {
         <div className="flex items-center gap-1">
           {(['30d', '90d', '1y'] as RangePeriod[]).map(p => (
             <button key={p} onClick={() => setPeriod(p)}
-              className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 rounded border transition-all ${period === p ? 'bg-blue/20 text-blue border-blue/30' : 'border-white/10 text-white/30 hover:text-white/60'}`}>
+              className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 rounded border transition-all ${period === p ? 'bg-accent/20 text-accent border-accent/30' : 'border-white/10 text-white/30 hover:text-white/60'}`}>
               {p}
             </button>
           ))}
@@ -208,12 +208,12 @@ export default function AdminMetrics() {
       {/* KPI cards */}
       <div className="grid grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 gap-4 mb-8">
         <StatCard label="Total sesiones" value={String(confirmed.length)} sub={`${uniqueClients} clientes únicos`} />
-        <StatCard label="Ingresos estimados" value={`€${totalRevenue}`} sub={`${periodLabel}`} accent="text-blue" />
+        <StatCard label="Ingresos estimados" value={`€${totalRevenue}`} sub={`${periodLabel}`} accent="text-accent" />
         <StatCard label="Ingresos reales" value={`€${realRevenue}`} sub={`${attended.length} check-ins`} accent="text-success" />
         <StatCard label="Ticket medio" value={`€${ticketMedio}`} sub="por sesión" />
         <StatCard label="Ocupación" value={`${occupancyRate}%`}
           sub="del tiempo disponible"
-          accent={occupancyRate > 60 ? 'text-success' : occupancyRate > 30 ? 'text-blue' : 'text-white'} />
+          accent={occupancyRate > 60 ? 'text-success' : occupancyRate > 30 ? 'text-accent' : 'text-white'} />
         <StatCard label="Tasa no-show" value={`${noShowRate}%`}
           sub={`${noShows.length} de ${confirmed.length}`}
           accent={noShowRate > 15 ? 'text-danger' : noShowRate > 8 ? 'text-warn' : 'text-white'} />
@@ -223,8 +223,8 @@ export default function AdminMetrics() {
       {!loading && confirmed.length > 0 && (
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 mb-8">
           {[
-            { label: 'Cockpit estrella', value: bestCockpit?.name || '—', sub: `${bestCockpit?.sesiones || 0} sesiones · €${bestCockpit?.revenue || 0}`, color: COCKPIT_COLORS[cockpitUsage.indexOf(bestCockpit)] },
-            { label: 'Hora pico', value: peakHour?.label || '—', sub: `${peakHour?.count || 0} reservas a esta hora`, color: '#0066FF' },
+            { label: 'Campo estrella', value: bestCockpit?.name || '—', sub: `${bestCockpit?.sesiones || 0} sesiones · €${bestCockpit?.revenue || 0}`, color: COCKPIT_COLORS[cockpitUsage.indexOf(bestCockpit)] },
+            { label: 'Hora pico', value: peakHour?.label || '—', sub: `${peakHour?.count || 0} reservas a esta hora`, color: '#FFD000' },
             { label: 'Día más activo', value: bestDay?.label || '—', sub: `${bestDay?.count || 0} sesiones`, color: '#8B5CF6' },
             { label: 'Mejor mes', value: bestMonth?.label || '—', sub: `€${bestMonth?.revenue || 0} · ${bestMonth?.sesiones || 0} ses.`, color: '#F59E0B' },
           ].map(({ label, value, sub, color }) => (
@@ -256,20 +256,20 @@ export default function AdminMetrics() {
                 <YAxis tick={{ fill: 'rgba(255,255,255,0.2)', fontSize: 10 }} axisLine={false} tickLine={false}
                   tickFormatter={v => `€${v}`} width={44} />
                 <Tooltip {...TOOLTIP_STYLE} formatter={(v, name) => [name === 'revenue' ? `€${v}` : v, name === 'revenue' ? 'Ingresos' : 'Sesiones']} />
-                <Line type="monotone" dataKey="revenue" stroke="#0066FF" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="revenue" stroke="#FFD000" strokeWidth={2} dot={false} />
                 <Line type="monotone" dataKey="sesiones" stroke="#8B5CF6" strokeWidth={1.5} dot={false} strokeDasharray="4 4" />
               </LineChart>
             </ResponsiveContainer>
           )}
           <div className="flex items-center gap-4 mt-2">
-            <span className="flex items-center gap-1.5 text-[0.65rem] text-white/30"><span className="w-3 h-0.5 bg-blue inline-block" />Ingresos</span>
+            <span className="flex items-center gap-1.5 text-[0.65rem] text-white/30"><span className="w-3 h-0.5 bg-accent inline-block" />Ingresos</span>
             <span className="flex items-center gap-1.5 text-[0.65rem] text-white/30"><span className="w-3 h-0.5 bg-purple-500 inline-block border-dashed" />Sesiones</span>
           </div>
         </div>
 
         {/* Cockpit usage */}
         <div className="bg-[#111] border border-white/[0.07] rounded-lg p-5">
-          <h2 className="font-head font-bold text-xs text-white/40 uppercase tracking-wider mb-4">Uso por cockpit</h2>
+          <h2 className="font-head font-bold text-xs text-white/40 uppercase tracking-wider mb-4">Uso por campo</h2>
           {loading ? <div className="h-44 skeleton bg-white/5 rounded" /> : (
             <div className="space-y-2.5">
               {cockpitUsage.map((c, i) => {
@@ -304,7 +304,7 @@ export default function AdminMetrics() {
                 <Tooltip {...TOOLTIP_STYLE} formatter={(v) => [v, 'Reservas']} />
                 <Bar dataKey="count" radius={[3,3,0,0]}>
                   {peakHours.map((h, i) => (
-                    <Cell key={i} fill={h.count === Math.max(...peakHours.map(x => x.count)) ? '#0066FF' : 'rgba(255,255,255,0.08)'} />
+                    <Cell key={i} fill={h.count === Math.max(...peakHours.map(x => x.count)) ? '#FFD000' : 'rgba(255,255,255,0.08)'} />
                   ))}
                 </Bar>
               </BarChart>
@@ -373,7 +373,7 @@ export default function AdminMetrics() {
               <Tooltip {...TOOLTIP_STYLE} formatter={(v, name) => [name === 'revenue' ? `€${v}` : v, name === 'revenue' ? 'Ingresos' : 'Sesiones']} />
               <Bar dataKey="revenue" radius={[4,4,0,0]}>
                 {monthlyRevenue.map((m, i) => (
-                  <Cell key={i} fill={m.revenue === Math.max(...monthlyRevenue.map(x => x.revenue)) ? '#F59E0B' : '#0066FF'} />
+                  <Cell key={i} fill={m.revenue === Math.max(...monthlyRevenue.map(x => x.revenue)) ? '#F59E0B' : '#FFD000'} />
                 ))}
               </Bar>
             </BarChart>
@@ -404,8 +404,8 @@ export default function AdminMetrics() {
                     <td className="px-5 py-3 text-white/40 text-xs">{c.email}</td>
                     <td className="px-5 py-3">
                       <div className="flex items-center gap-2">
-                        <div className="h-1 rounded-full bg-blue/20 flex-1 max-w-[60px]">
-                          <div className="h-full rounded-full bg-blue" style={{ width: `${(c.sessions / topCustomers[0].sessions) * 100}%` }} />
+                        <div className="h-1 rounded-full bg-accent/20 flex-1 max-w-[60px]">
+                          <div className="h-full rounded-full bg-accent" style={{ width: `${(c.sessions / topCustomers[0].sessions) * 100}%` }} />
                         </div>
                         <span className="text-white/70 text-sm font-head font-bold">{c.sessions}</span>
                       </div>
@@ -456,7 +456,7 @@ function generateDemoData(period: RangePeriod): Booking[] {
         checked_in:      d > 3 ? true : null,
         notes:           null,
         created_at:      '',
-        session_type:    { id: st.id, name: st.name, duration_minutes: 60, price: st.price, max_people: 4, color: '#0066FF' },
+        session_type:    { id: st.id, name: st.name, duration_minutes: 60, price: st.price, max_people: 4, color: '#FFD000' },
       })
     }
   }

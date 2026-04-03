@@ -10,9 +10,9 @@ import {
 } from 'recharts'
 
 // ── Constants ─────────────────────────────────────────────────────
-const COCKPIT_COLORS = ['#F59E0B', '#8B5CF6', '#0066FF', '#3B82F6', '#0EA5E9', '#06B6D4', '#00AACC', '#3385FF']
+const COCKPIT_COLORS = ['#F59E0B', '#8B5CF6', '#FFD000', '#3B82F6', '#0EA5E9', '#06B6D4', '#00AACC', '#3385FF']
 const COCKPIT_NAMES  = ['Motion', 'Triple Pro', 'Std 1', 'Std 2', 'Std 3', 'Std 4', 'Std 5', 'Std 6']
-const SESSION_COLORS = ['#0066FF', '#8B5CF6', '#F59E0B', '#00FF88', '#FF3333', '#00AACC']
+const SESSION_COLORS = ['#FFD000', '#8B5CF6', '#F59E0B', '#00FF88', '#FF3333', '#00AACC']
 const COCKPIT_IDS    = [1, 2, 3, 4, 5, 6, 7, 8]
 
 const TL_START = 10 * 60
@@ -54,7 +54,7 @@ function PeriodTabs({ value, onChange }: { value: Period; onChange: (p: Period) 
           key={p}
           onClick={() => onChange(p)}
           className={`text-[0.65rem] font-head uppercase tracking-wider px-2.5 py-1 rounded transition-all ${
-            value === p ? 'bg-blue/20 text-blue border border-blue/30' : 'text-white/25 border border-transparent hover:text-white/50'
+            value === p ? 'bg-accent/20 text-accent border border-accent/30' : 'text-white/25 border border-transparent hover:text-white/50'
           }`}
         >
           {labels[p]}
@@ -132,7 +132,7 @@ function Timeline({
 
               {/* Now indicator */}
               {nowVisible && (
-                <div className="absolute top-0 bottom-0 w-px bg-blue/60 z-10"
+                <div className="absolute top-0 bottom-0 w-px bg-accent/60 z-10"
                   style={{ left: `${nowPct}%` }} />
               )}
 
@@ -190,7 +190,7 @@ function Timeline({
 
       {nowVisible && (
         <div className="relative ml-[88px] mt-1 h-4 flex-shrink-0">
-          <span className="absolute text-[0.58rem] text-blue/60 font-body -translate-x-1/2"
+          <span className="absolute text-[0.58rem] text-accent/60 font-body -translate-x-1/2"
             style={{ left: `${nowPct}%` }}>
             {String(Math.floor(now / 60)).padStart(2, '0')}:{String(now % 60).padStart(2, '0')}
           </span>
@@ -215,9 +215,9 @@ function SessionRow({
   const isNow    = hhmm(b.start_time) <= nowHHMM && !isPast
 
   return (
-    <div className={`flex items-center gap-3 px-4 py-3 border-b border-white/[0.04] last:border-0 ${isNow ? 'bg-blue/[0.04]' : ''}`}>
+    <div className={`flex items-center gap-3 px-4 py-3 border-b border-white/[0.04] last:border-0 ${isNow ? 'bg-accent/[0.04]' : ''}`}>
       <div className="w-14 flex-shrink-0">
-        <span className={`font-head font-bold text-sm ${isNow ? 'text-blue' : 'text-white/50'}`}>{hhmm(b.start_time)}</span>
+        <span className={`font-head font-bold text-sm ${isNow ? 'text-accent' : 'text-white/50'}`}>{hhmm(b.start_time)}</span>
         <span className="text-white/20 text-xs block">{hhmm(b.end_time)}</span>
       </div>
       <div className="w-12 flex-shrink-0 flex flex-wrap gap-0.5">
@@ -283,7 +283,7 @@ function BookingQuickModal({
   onReset:   () => void
 }) {
   const b     = booking
-  const color = COCKPIT_COLORS[(b.cockpit_ids[0] ?? 1) - 1] ?? '#0066FF'
+  const color = COCKPIT_COLORS[(b.cockpit_ids[0] ?? 1) - 1] ?? '#FFD000'
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] flex items-center justify-center p-4" onClick={onClose}>
       <div className="bg-[#111] border border-white/[0.1] rounded-xl w-full max-w-sm shadow-[0_24px_80px_rgba(0,0,0,0.8)]" onClick={e => e.stopPropagation()}>
@@ -292,7 +292,7 @@ function BookingQuickModal({
           <div className="flex justify-between items-start mb-3">
             <div>
               <h3 className="font-head font-bold text-base text-white">{b.customer_name}</h3>
-              <p className="text-white/30 text-xs mt-0.5">{hhmm(b.start_time)}–{hhmm(b.end_time)} · {b.cockpit_ids.map(id => `C${id}`).join(', ')}</p>
+              <p className="text-white/30 text-xs mt-0.5">{hhmm(b.start_time)}–{hhmm(b.end_time)} · {b.cockpit_ids.map(id => `Campo ${id}`).join(', ')}</p>
             </div>
             <button onClick={onClose} className="w-7 h-7 flex items-center justify-center rounded text-white/25 hover:text-white hover:bg-white/5 transition-all text-lg">×</button>
           </div>
@@ -403,12 +403,12 @@ function CreateBookingModal({
     onCreated(); onClose()
   }
 
-  const inputCls = "bg-[#0a0a0a] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-blue focus:outline-none transition-all w-full placeholder:text-white/20"
+  const inputCls = "bg-[#0a0a0a] border border-white/10 rounded px-3 py-2 text-white text-sm focus:border-accent focus:outline-none transition-all w-full placeholder:text-white/20"
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto" onClick={onClose}>
       <div className="bg-[#111] border border-white/[0.1] rounded-xl w-full max-w-lg shadow-[0_24px_80px_rgba(0,0,0,0.9)] my-4" onClick={e => e.stopPropagation()}>
-        <div className="h-0.5 rounded-t-xl bg-blue" />
+        <div className="h-0.5 rounded-t-xl bg-accent" />
         <div className="p-6">
           <div className="flex justify-between items-center mb-5">
             <h3 className="font-head font-bold text-lg text-white">Nueva Reserva</h3>
@@ -446,9 +446,9 @@ function CreateBookingModal({
               </div>
             </div>
 
-            {/* Cockpits */}
+            {/* Campos */}
             <div>
-              <label className="text-[0.65rem] font-head uppercase tracking-wider text-white/30 block mb-2">Cockpits * (selecciona al menos uno)</label>
+              <label className="text-[0.65rem] font-head uppercase tracking-wider text-white/30 block mb-2">Campos * (selecciona al menos uno)</label>
               <div className="flex flex-wrap gap-2">
                 {COCKPIT_IDS.map((id, ci) => (
                   <button key={id} type="button" onClick={() => toggleCockpit(id)}
@@ -505,7 +505,7 @@ function CreateBookingModal({
                 Cancelar
               </button>
               <button type="submit" disabled={loading}
-                className="flex-1 py-2.5 text-sm font-head font-semibold uppercase tracking-wider bg-blue text-white rounded hover:bg-blue/80 transition-all disabled:opacity-50">
+                className="flex-1 py-2.5 text-sm font-head font-semibold uppercase tracking-wider bg-accent text-black rounded hover:bg-accent/80 transition-all disabled:opacity-50">
                 {loading ? 'Creando…' : 'Crear Reserva'}
               </button>
             </div>
@@ -705,13 +705,13 @@ export default function AdminDashboard() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowCreate(true)}
-            className="flex items-center gap-2 text-sm font-head font-semibold uppercase tracking-wider px-4 py-2 bg-blue text-white rounded hover:bg-blue/80 transition-all"
+            className="flex items-center gap-2 text-sm font-head font-semibold uppercase tracking-wider px-4 py-2 bg-accent text-black rounded hover:bg-accent/80 transition-all"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4"><path d="M12 5v14M5 12h14"/></svg>
             Nueva Reserva
           </button>
           <button onClick={() => { load(); window.dispatchEvent(new CustomEvent('admin:refresh')) }}
-            className="w-8 h-8 flex items-center justify-center rounded border border-white/10 text-white/30 hover:border-blue/50 hover:text-blue transition-all"
+            className="w-8 h-8 flex items-center justify-center rounded border border-white/10 text-white/30 hover:border-accent/50 hover:text-accent transition-all"
             title="Recargar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-3.5 h-3.5">
               <path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
@@ -756,7 +756,7 @@ export default function AdminDashboard() {
                 <Tooltip contentStyle={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, fontSize: 12 }}
                   labelStyle={{ color: 'rgba(255,255,255,0.5)' }} itemStyle={{ color: '#fff' }}
                   formatter={(v) => [`€${v}`, 'Ingresos']} cursor={{ fill: 'rgba(255,255,255,0.04)' }} />
-                <Bar dataKey="ingresos" fill="#0066FF" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="ingresos" fill="#FFD000" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           )}
@@ -809,7 +809,7 @@ export default function AdminDashboard() {
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-3 text-[0.65rem] font-body text-white/25">
               <span className="flex items-center gap-1">
-                <span className="w-3 h-2 rounded-sm inline-block bg-blue/35 border-l-2 border-blue" /> Reservado
+                <span className="w-3 h-2 rounded-sm inline-block bg-accent/35 border-l-2 border-accent" /> Reservado
               </span>
               <span className="flex items-center gap-1">
                 <span className="w-3 h-2 rounded-sm inline-block bg-success/30 border-l-2 border-success" /> Asistió
@@ -820,7 +820,7 @@ export default function AdminDashboard() {
             </div>
             <button
               onClick={() => setTimelineExp(true)}
-              className="w-7 h-7 flex items-center justify-center rounded border border-white/10 text-white/25 hover:border-blue hover:text-blue transition-all"
+              className="w-7 h-7 flex items-center justify-center rounded border border-white/10 text-white/25 hover:border-accent hover:text-accent transition-all"
               title="Ampliar timeline"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="w-3.5 h-3.5">
@@ -845,14 +845,14 @@ export default function AdminDashboard() {
             <div className="flex items-center rounded border border-white/10 overflow-hidden">
               <button
                 onClick={() => setSessionView('today')}
-                className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 transition-all ${sessionView === 'today' ? 'bg-blue/20 text-blue' : 'text-white/25 hover:text-white/50'}`}
+                className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 transition-all ${sessionView === 'today' ? 'bg-accent/20 text-accent' : 'text-white/25 hover:text-white/50'}`}
               >
                 Hoy
                 <span className="ml-1.5 text-[0.6rem]">{todayAll.length}</span>
               </button>
               <button
                 onClick={() => setSessionView('now')}
-                className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 transition-all border-l border-white/10 ${sessionView === 'now' ? 'bg-blue/20 text-blue' : 'text-white/25 hover:text-white/50'}`}
+                className={`text-xs font-head uppercase tracking-wider px-3 py-1.5 transition-all border-l border-white/10 ${sessionView === 'now' ? 'bg-accent/20 text-accent' : 'text-white/25 hover:text-white/50'}`}
               >
                 Ahora
                 {activeSessions.length > 0 && (
@@ -887,7 +887,7 @@ export default function AdminDashboard() {
             <h2 className="font-head font-bold text-xs text-white/40 uppercase tracking-wider">
               Bloqueos próximos
             </h2>
-            <a href="/admin/block-slots" className="text-[0.65rem] font-head uppercase tracking-wider text-white/20 hover:text-blue transition-colors">
+            <a href="/admin/block-slots" className="text-[0.65rem] font-head uppercase tracking-wider text-white/20 hover:text-accent transition-colors">
               Gestionar →
             </a>
           </div>
@@ -901,7 +901,7 @@ export default function AdminDashboard() {
                   <p className="text-white/25 text-xs">{s.date} · {hhmm(s.start_time)}–{hhmm(s.end_time)}</p>
                 </div>
                 <span className="text-white/25 text-xs font-head flex-shrink-0">
-                  {s.cockpit_id ? `C${s.cockpit_id}` : 'Todos'}
+                  {s.cockpit_id ? `Campo ${s.cockpit_id}` : 'Todos'}
                 </span>
               </div>
             ))}
@@ -956,8 +956,8 @@ export default function AdminDashboard() {
 
 // ── Demo data ─────────────────────────────────────────────────────
 const DEMO_SESSION_TYPES: SessionType[] = [
-  { id: 1, name: 'Individual 1h', duration_minutes: 60, price: 40, max_people: 1, color: '#0066FF' },
-  { id: 2, name: 'Individual 30min', duration_minutes: 30, price: 25, max_people: 1, color: '#0066FF' },
+  { id: 1, name: 'Individual 1h', duration_minutes: 60, price: 40, max_people: 1, color: '#FFD000' },
+  { id: 2, name: 'Individual 30min', duration_minutes: 30, price: 25, max_people: 1, color: '#FFD000' },
   { id: 3, name: 'Duo 1h', duration_minutes: 60, price: 70, max_people: 2, color: '#8B5CF6' },
   { id: 4, name: 'Grupal 2h', duration_minutes: 120, price: 100, max_people: 8, color: '#F59E0B' },
 ]
@@ -993,7 +993,7 @@ function generateDemoChart(period: Period): Booking[] {
       start_time: `${String(s.h).padStart(2,'0')}:00`,
       end_time:   `${String(s.h + 1).padStart(2,'0')}:00`,
       status: 'confirmed', checked_in: null, notes: null, created_at: '',
-      session_type: { id: (i % 4) + 1, name: s.name, duration_minutes: 60, price: s.price, max_people: 1, color: '#0066FF' },
+      session_type: { id: (i % 4) + 1, name: s.name, duration_minutes: 60, price: s.price, max_people: 1, color: '#FFD000' },
     }))
   }
   const range = period === 'week' ? 7 : period === 'month' ? 30 : 365
@@ -1021,7 +1021,7 @@ function generateDemoChart(period: Period): Booking[] {
         checked_in: null,
         notes: null,
         created_at: '',
-        session_type: { id: 1, name: DEMO_SESSION_TYPES[i % 4].name, duration_minutes: 60, price, max_people: 1, color: '#0066FF' },
+        session_type: { id: 1, name: DEMO_SESSION_TYPES[i % 4].name, duration_minutes: 60, price, max_people: 1, color: '#FFD000' },
       })
     }
   }

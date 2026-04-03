@@ -1,11 +1,15 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
+  const isAdmin = pathname.startsWith('/admin')
 
   useEffect(() => {
+    if (isAdmin) return
     const onMove = (e: MouseEvent) => {
       if (cursorRef.current) {
         cursorRef.current.style.left = `${e.clientX}px`
@@ -14,7 +18,9 @@ export default function CustomCursor() {
     }
     window.addEventListener('mousemove', onMove)
     return () => window.removeEventListener('mousemove', onMove)
-  }, [])
+  }, [isAdmin])
+
+  if (isAdmin) return null
 
   return (
     <div ref={cursorRef} className="cursor-tactical">

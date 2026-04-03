@@ -21,6 +21,7 @@ const config: Config = {
       fontFamily: {
         display: ['var(--font-display)', '"Black Ops One"', 'cursive'],
         body: ['var(--font-body)', '"DM Sans"', 'sans-serif'],
+        head: ['Rajdhani', 'sans-serif'],
       },
       borderRadius: {
         tactical: '2px',
